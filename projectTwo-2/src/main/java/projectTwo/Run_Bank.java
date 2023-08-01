@@ -32,7 +32,7 @@ public class Run_Bank {
         try {
             Scanner scnr = new Scanner(System.in);
             //PATH MIGHT BE WRONG
-            CustomerMap.read_data_UwU("C:\\Users\\Joshua Salas\\IdeaProjects\\projectTwo-2\\src\\main\\java\\projectTwo\\CS 3331 - Bank Users (2).csv");
+            CustomerMap.read_data_UwU("projectTwo-2/src/main/java/projectTwo/CS 3331 - Bank Users (2).csv");
 
             //Map<List<String>, Customer> customerMap = create_customerMap(create_data.get_data());
             boolean access = true;
