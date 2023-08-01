@@ -129,6 +129,7 @@ public class Run_Bank {
     }
 
     public static void add_new_user(Map<List<String>, Customer> data) {
+        Random rdm = new Random();
         Scanner scr = new Scanner(System.in);
         Customer new_Customer = new Customer();
         String placeholder;
@@ -171,7 +172,19 @@ public class Run_Bank {
 
         int t = Integer.parseInt(placeholder);
 
-        //new_Customer.get_Credit().set_Credit_Max();
+        if(t < 580){
+            new_Customer.get_Credit().set_Credit_Max(rdm.nextInt(100,699));
+        }else if (t > 581 && t < 669){
+            new_Customer.get_Credit().set_Credit_Max(rdm.nextInt(700,4999));
+        }else if (t > 670 && t < 739){
+            new_Customer.get_Credit().set_Credit_Max(rdm.nextInt(5000,7499));
+        }else if (t > 740 && t < 799){
+            new_Customer.get_Credit().set_Credit_Max(rdm.nextInt(7500,15999));
+        }else if (t > 800){
+            new_Customer.get_Credit().set_Credit_Max(rdm.nextInt(16000,25000));
+        }
+
+        new_Customer.get_Credit().set_Credit_Start_Bal(0.00);
 
     }
 
