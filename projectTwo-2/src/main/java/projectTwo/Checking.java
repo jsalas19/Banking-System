@@ -100,7 +100,7 @@ public class Checking implements account{
      */
     @Override
     public void payment(account recipient, double amount) {
-        if (recipient.get_Account_Num() != checking_account_no && (recipient.get_Account_Num() % 100) != (checking_account_no % 100)){
+        if (recipient.get_Account_Num() != checking_account_no && (recipient.get_Account_Num() % 1000) != (checking_account_no % 1000)){
             if (amount <= this.checking_bal) {
                 withdraw(amount);
                 recipient.deposit(amount);
@@ -121,7 +121,7 @@ public class Checking implements account{
      */
     @Override
     public void transfer(account account_Type,double amount) {
-        if (account_Type.get_Account_Num() != checking_account_no && (account_Type.get_Account_Num() % 100) == (checking_account_no % 100)) {
+        if (account_Type.get_Account_Num() != checking_account_no && (account_Type.get_Account_Num() % 1000) == (checking_account_no % 1000)) {
             if (amount <= this.checking_bal) {
                 withdraw(amount);
                 account_Type.deposit(amount);

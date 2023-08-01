@@ -84,7 +84,7 @@ public class Savings implements account{
     public void payment(account recipient, double amount){
         //the amount for the payment has to be less than the blance, if not,
         //not enough funds to pay someone else
-        if (recipient.get_Account_Num() != Sav_Acc_Num && (recipient.get_Account_Num() % 100) != (Sav_Acc_Num % 100)){
+        if (recipient.get_Account_Num() != Sav_Acc_Num && (recipient.get_Account_Num() % 1000) != (Sav_Acc_Num % 1000)){
             if(amount <= Savings_Balance){
                 withdraw(amount);
                 recipient.deposit(amount);

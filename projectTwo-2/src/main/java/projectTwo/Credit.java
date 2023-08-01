@@ -104,7 +104,7 @@ public class Credit implements account{
      */
     public void payment(account recipient, double amount) {
         //amount must be greater than 0.00 (also no overdraft allowed)
-        if (recipient.get_Account_Num() != cred_Acc_Num && (recipient.get_Account_Num() % 100) != (cred_Acc_Num % 100)){
+        if (recipient.get_Account_Num() != cred_Acc_Num && (recipient.get_Account_Num() % 1000) != (cred_Acc_Num % 1000)){
             if (amount <= credit_Balance) {
                 withdraw(amount);
                 //accountType.deposit(amount);
@@ -126,7 +126,7 @@ public class Credit implements account{
      */
     public void transfer(account account_Type,double amount) {
         //transfer needs to be greater than 0.00(no over draft allowed)
-        if (account_Type.get_Account_Num() != cred_Acc_Num && (account_Type.get_Account_Num() % 100) == (cred_Acc_Num % 100)) {
+        if (account_Type.get_Account_Num() != cred_Acc_Num && (account_Type.get_Account_Num() % 1000) == (cred_Acc_Num % 1000)) {
             if (amount <= credit_Balance) {
                 withdraw(amount);
                 account_Type.deposit(amount);
