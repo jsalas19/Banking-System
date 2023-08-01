@@ -1,0 +1,141 @@
+package projectTwo;
+
+import projectTwo.BankLogger;
+import projectTwo.account;
+
+/**
+ * @author Joshua Salas
+ * This class contains the user's checking information and allows the user to withdraw, deposit, pay another user's
+ * projectTwo.account, and transfer between accounts of the same user.
+ */
+public class Checking implements account{
+    /**
+     * The attributes of this class are the following:
+     * checking_account_no and checking_bal
+     */
+    private int checking_account_no;
+    protected double checking_bal;
+    private String fullName;
+
+    /**
+     * @param checking_account_no - projectTwo.account number of user.
+     * This method is used to set the checking_account_no attribute.
+     */
+    public void set_Checking_account_no(int checking_account_no) {
+        this.checking_account_no = checking_account_no;
+
+    }
+
+    public void set_FullName(String firstName, String lastName){ //add this
+        this.fullName = firstName + " "+ lastName;
+    }
+
+    public String get_FullName(){ //add this
+        return fullName;
+    }
+
+    /**
+     * @param checking_start_bal - checking balance of user.
+     * This method is used to set the checking_bal attribute.
+     */
+    public void set_Checking_start_bal(double checking_start_bal) {
+        this.checking_bal = checking_start_bal;
+    }
+
+    /**
+     * @return The value of 'checking_account_no'.
+     * Gets the private attribute 'checking_account_no'.
+     */
+    public int get_Account_Num() {
+        return checking_account_no;
+    }
+
+    /**
+     *
+     * @return The value of 'checking_bal'.
+     * Gets the private attribute 'checking_bal'.
+     */
+    public double balance() {return checking_bal;}
+
+    /**
+     *
+     * @param amount
+     * method is to deposit funds into an projectTwo.account
+     * amount > 0.00
+     *
+     * apply to checkings and  to savings
+     */
+    @Override
+    public void deposit(double amount) {
+        if (amount >= 0.0){
+            this.checking_bal += amount;
+            BankLogger.deposit_UwU(this, amount);
+        }
+    }
+
+    /**
+     *
+     * @param amount
+     * method is to withdraw fund from an projectTwo.account
+     * amount > 0.00
+     *
+     * apply to checkings, saving ,credit
+     */
+    @Override
+    public void withdraw(double amount) {
+        if (amount <= this.checking_bal){
+            this.checking_bal -= amount;
+            BankLogger.withdraw_UwU(this, amount);
+        }
+    }
+
+    /**
+     *
+     * @param recipient
+     * @param amount
+     * method is for customer to pay another bank customer
+     * using projectTwo.account of their choice
+     *
+     * apply to checkings, saving and credit
+     */
+    @Override
+    public void payment(account recipient, double amount) {
+        if (recipient.get_Account_Num() != checking_account_no && (recipient.get_Account_Num() % 100) != (checking_account_no % 100)){
+            if (amount <= this.checking_bal) {
+                withdraw(amount);
+                recipient.deposit(amount);
+                BankLogger.payment_UwU(this, recipient, amount);
+                System.out.println("Success! (payment)");
+            }
+            System.out.println("Failed! (payment)");
+        }
+    }
+
+    /**
+     *
+     * @param amount
+     * method is for customer to transfer money between
+     * accounts
+     *
+     * apply to projectOne.checking, saving and credit
+     */
+    @Override
+    public void transfer(account account_Type,double amount) {
+        if (account_Type.get_Account_Num() != checking_account_no && (account_Type.get_Account_Num() % 100) == (checking_account_no % 100)) {
+            if (amount <= this.checking_bal) {
+                withdraw(amount);
+                account_Type.deposit(amount);
+                BankLogger.transfer_UwU(this, account_Type, amount);
+                System.out.println("Success! (transfer)");
+            }
+            System.out.println("Failed! (transfer)");
+        }
+    }
+
+    @Override
+    public void display_account_info() {
+        System.out.println("Account Number: "+ this.checking_account_no);
+        System.out.println("\tBalance: "+this.checking_bal);
+        BankLogger.inquire_balance_UwU(this);
+    }
+}
