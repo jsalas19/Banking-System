@@ -1,9 +1,6 @@
 package projectTwo;
 
 import com.opencsv.exceptions.CsvValidationException;
-import projectTwo.CSV;
-import projectTwo.Customer;
-import projectTwo.account;
 
 import java.io.IOException;
 import java.util.*;
@@ -107,7 +104,7 @@ public class CustomerMap {
         return null;
     }
 
-    public static account find_specific_account_AccountName(Customer customer, String i){
+    public static account return_selected_accountType(Customer customer, String i){
 
         //Enter in Here if in Prompt Account your did not choose 4
         if(!Objects.equals(i,"4")) {

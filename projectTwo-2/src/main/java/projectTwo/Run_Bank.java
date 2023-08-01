@@ -1,7 +1,6 @@
 package projectTwo;
 
 import com.opencsv.exceptions.CsvValidationException;
-import projectTwo.*;
 
 import java.io.*;
 import java.util.*;
@@ -64,7 +63,7 @@ public class Run_Bank {
                                     if (left == null) {
                                         System.out.println("Sorry, account was not found \nEnter a proper name!");
                                     } else {
-                                        account specifiedA = CustomerMap.find_specific_account_AccountName(left, prompt_account_type());
+                                        account specifiedA = CustomerMap.return_selected_accountType(left, prompt_account_type());
                                         if (specifiedA != null) {
                                             available_actions_specific(specifiedA);
                                         }
