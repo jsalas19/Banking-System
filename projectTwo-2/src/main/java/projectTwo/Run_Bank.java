@@ -63,7 +63,7 @@ public class Run_Bank {
                                     if (left == null) {
                                         System.out.println("Sorry, account was not found \nEnter a proper name!");
                                     } else {
-                                        account specifiedA = CustomerMap.return_selected_accountType(left, Prompts.prompt_account_type());
+                                        account specifiedA = Prompts.return_selected_accountType(left, Prompts.prompt_account_type());
                                         if (specifiedA != null) {
                                             available_actions_specific(specifiedA);
                                         }
