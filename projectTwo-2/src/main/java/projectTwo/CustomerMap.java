@@ -17,7 +17,6 @@ public class CustomerMap {
     /**
      * This Method creates a Hashmap of customers that we can use to find a customer.
      * @param data - Information that has been read from provided csv file.
-     * @return Map of customers where the keyset is the customer ID, First Name, and Last Name.
      */
     public static void create_customerMap(Map<String, List<String>> data){
         List<String> stringList = new ArrayList<>();
@@ -43,65 +42,6 @@ public class CustomerMap {
             customerMap.put(stringList, customer);
             stringList = new ArrayList<>();
         }
-    }
-
-    public static Customer find_account(String str1, String str2, String str3){
-        //projectTwo.Customer placeHolder = new projectTwo.Customer(null, null);
-        //System.out.println(customerMap.size());
-        for (List<String> j : customerMap.keySet()){
-            //System.out.println(j);
-            if (j.contains(str1) && j.contains(str2) && j.contains(str3)){
-                return customerMap.get(j);
-            }
-        }
-        return null;
-    }
-
-    public static Customer find_account_ID(String str1){
-        //projectTwo.Customer placeHolder = new projectTwo.Customer(null, null);
-        for (List<String> j : customerMap.keySet()){
-            if (j.contains(str1)){
-                //System.out.println(customerMap.get(j));
-                return customerMap.get(j);
-            }
-        }
-        return null;
-    }
-
-    public static account find_specific_account(String i){
-        Scanner scr = new Scanner(System.in);
-        //System.out.println("What is the projectTwo.account number? \nEnter Account Number: ");
-        if (!Objects.equals(i, "4")){
-            System.out.println("What is the projectTwo.account number? \nEnter Account Number: ");
-            switch (i) {
-                case "1":
-                    i = scr.nextLine();
-                    for (List<String> s : customerMap.keySet()) {
-                        //System.out.println(s);
-                        if (String.valueOf(customerMap.get(s).get_Checking().get_Account_Num()).equals(i)) {
-                            return customerMap.get(s).get_Checking();
-                        }
-                    }
-                    break;
-                case "2":
-                    i = scr.nextLine();
-                    for (List<String> s : customerMap.keySet()) {
-                        if (String.valueOf(customerMap.get(s).get_Savings().get_Account_Num()).equals(i)) {
-                            return customerMap.get(s).get_Savings();
-                        }
-                    }
-                    break;
-                case "3":
-                    i = scr.nextLine();
-                    for (List<String> s : customerMap.keySet()) {
-                        if (String.valueOf(customerMap.get(s).get_Credit().get_Account_Num()).equals(i)) {
-                            return customerMap.get(s).get_Credit();
-                        }
-                    }
-                    break;
-            }
-        }
-        return null;
     }
 
     public static account return_selected_accountType(Customer customer, String i){

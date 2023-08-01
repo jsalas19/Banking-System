@@ -59,7 +59,7 @@ public class Run_Bank {
                                 strList.add(idString);
                                 System.out.println(strList.size());
                                 if (strList.size() == 3) {
-                                    left = CustomerMap.find_account(strList.get(0), strList.get(1), strList.get(2));
+                                    left = CustomerFinder.find_account(strList.get(0), strList.get(1), strList.get(2));
                                     if (left == null) {
                                         System.out.println("Sorry, account was not found \nEnter a proper name!");
                                     } else {
@@ -74,7 +74,7 @@ public class Run_Bank {
                             break;
 
                         case "2":
-                            account specified = CustomerMap.find_specific_account(prompt_account_type());
+                            account specified = CustomerFinder.find_specific_account(prompt_account_type());
                             assert specified != null;
                             specified.display_account_info();
                             available_actions_specific(specified);
@@ -91,7 +91,7 @@ public class Run_Bank {
                             str = scnr.nextLine();
                             List<String> strList = new ArrayList<>(List.of(str.split(" ")));
 
-                            Customer left = CustomerMap.find_account(strList.get(0), strList.get(1), strList.get(2));
+                            Customer left = CustomerFinder.find_account(strList.get(0), strList.get(1), strList.get(2));
                             if (left == null) {
                                 System.out.print("Customer does not exist");
                             } else {
@@ -103,7 +103,7 @@ public class Run_Bank {
                             System.out.println("Enter Customers ID Number");
                             str = scnr.nextLine();
 
-                            Customer customer = CustomerMap.find_account_ID(str);
+                            Customer customer = CustomerFinder.find_account_ID(str);
                             if (customer == null) {
                                 System.out.println("Customer does not Exist");
                             } else {
@@ -270,7 +270,7 @@ public class Run_Bank {
                                 str = scr.nextLine();
                                 amount = Double.parseDouble(str);
                             }
-                            account pay_acc = CustomerMap.find_specific_account(prompt_account_type());
+                            account pay_acc = CustomerFinder.find_specific_account(prompt_account_type());
                             if (pay_acc != null) {
                                 accountType.payment(pay_acc, amount);
                                 //accountType.display_account_info();
@@ -284,7 +284,7 @@ public class Run_Bank {
                             str = scr.nextLine();
                             amount = Double.parseDouble(str);
                             System.out.println();
-                            account transferAccount = CustomerMap.find_specific_account(prompt_account_type());
+                            account transferAccount = CustomerFinder.find_specific_account(prompt_account_type());
                             if (transferAccount != null) {
                                 accountType.transfer(transferAccount, amount);
                                 //accountType.display_account_info();
@@ -343,7 +343,7 @@ public class Run_Bank {
                             }
 
                             // System.out.println("What kind of account are we making a payment towards?");
-                            account pay_acc = CustomerMap.find_specific_account(prompt_account_type());
+                            account pay_acc = CustomerFinder.find_specific_account(prompt_account_type());
                             if (pay_acc != null) {
                                 accountType.payment(pay_acc, amount);
                                 //projectTwo.BankLogger.add("OwO");
@@ -365,7 +365,7 @@ public class Run_Bank {
                             }
                             //System.out.println();
                             System.out.println("Choose recipient AccountType to Transfer Funds.");
-                            account transferAccount = CustomerMap.find_specific_account(prompt_account_type());
+                            account transferAccount = CustomerFinder.find_specific_account(prompt_account_type());
                             if (transferAccount != null) {
                                 accountType.transfer(transferAccount, amount);
                                 accountType.display_account_info();
@@ -430,7 +430,7 @@ public class Run_Bank {
                                 System.out.println("INSUFFICIENT FUNDS!!:");
                             } else {
                                 System.out.println("What kind of account are we making a payment towards?");
-                                account pay_acc = CustomerMap.find_specific_account(prompt_account_type());
+                                account pay_acc = CustomerFinder.find_specific_account(prompt_account_type());
                                 if (pay_acc != null) {
                                     accountType.payment(pay_acc, amount);
                                     accountType.display_account_info();
@@ -451,7 +451,7 @@ public class Run_Bank {
                             }
 
                             System.out.println("Choose recipient AccountType to Transfer Funds.");
-                            account transferAccount = CustomerMap.find_specific_account(prompt_account_type());
+                            account transferAccount = CustomerFinder.find_specific_account(prompt_account_type());
                             if (transferAccount != null) {
                                 accountType.transfer(transferAccount, amount);
                                 accountType.display_account_info();
