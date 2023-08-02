@@ -92,8 +92,7 @@ public class UserTransactionLogger {
      * This method allow us to create a new text file with the name of the user that is logging in.
      * @param file the name of the user, complete name.
      */
-    public static void openLog(String file) {
-        account user = null;
+    public static void openLog(String file, Customer user) {
         File f = new File(file + ".txt");
         try {
             if (!f.isFile()) {
@@ -106,8 +105,9 @@ public class UserTransactionLogger {
         }
     }
     
-    public static void add_user_information(account user){
-        
+    public static void add_user_information(Customer user){
+        logFile.write(user.get_First_name() + " " + user.get_Last_name());
+
     }
 
     /**

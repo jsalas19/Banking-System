@@ -49,14 +49,10 @@ public class Run_Bank {
                             while (left == null) {
                                 System.out.println("Whose account would you like to inquire about? \nEnter Full Name of account (Ex: Joshua Salas or Joshua S):");
                                 str = scnr.nextLine();
-                                UserTransactionLogger.openLog(str);
-                                System.out.println("Enter your Identification Number:");
-                                idString = scnr.nextLine();
                                 List<String> strList = new ArrayList<>(List.of(str.split(" ")));
-                                strList.add(idString);
-                                System.out.println(strList.size());
-                                if (strList.size() == 3) {
+                                if (strList.size() == 2) {
                                     left = CustomerFinder.find_account(strList.get(0), strList.get(1), strList.get(2));
+                                    UserTransactionLogger.openLog(str, left);
                                     if (left == null) {
                                         System.out.println("Sorry, account was not found \nEnter a proper name!");
                                     } else {
