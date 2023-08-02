@@ -1,7 +1,5 @@
 package projectTwo;
 
-import projectTwo.BankLogger;
-import projectTwo.account;
 
 /**
  * @author deolivas4
@@ -26,10 +24,12 @@ public class Credit implements account{
      * setter method for private values declare in class
      */
     public void set_Credit_Acc_Num(int cred_Acc_Num){
+
         this.cred_Acc_Num = cred_Acc_Num;
     }
 
     public void set_FullName(String firstName, String lastName){ //add this
+
         this.fullName = firstName +" " + lastName;
     }
 
@@ -46,7 +46,7 @@ public class Credit implements account{
     }
 
     /**
-     * getter method for accountNumer
+     * getter method for accountNumber
      * @return cred_Acc_Num
      */
     public int get_Account_Num(){
@@ -68,30 +68,41 @@ public class Credit implements account{
     }
     /**
      * @param amount
-     * this method is to deposit money into credit projectTwo.account
+     * this method is to deposit money into credit account
      * also adjusts accounts balance
      */
-    public  void deposit(double amount) {
+    public boolean deposit(double amount){
         //deposit needs to be greater than 0.00
-        if(amount < 0.00) {
+        boolean depos = false;
+        if(credit_Balance + amount > 0.00){
+            System.out.println("Deposit DENIED. You're account only has a pending balance of : " + credit_Balance);
+
+        }
+        else if(amount > 0.00) {
             credit_Balance = credit_Balance + amount;
-            BankLogger.deposit_UwU(this, amount);
+            //BankLogger.deposit_UwU(this, amount);
             System.out.println("You made a deposit of $" + amount);
-        }else {
+            depos = true;
+        } else {
             System.out.println("you need more funds to complete a deposit");
         }
+        return depos;
+
     }
     /**
      * @param amount
      * this method is used to withdraw money
      */
     public void withdraw(double amount) {
-        if (Math.abs(credit_Balance) + amount < max_Credit) {
-            credit_Balance = credit_Balance - amount;
-            BankLogger.withdraw_UwU(this, amount);
-            System.out.println("you have successfully widthrawn $" + amount);
+        if (Math.abs(credit_Balance) + amount <=  max_Credit) {
+            credit_Balance = credit_Balance -amount;
+            //BankLogger.withdraw_UwU(this, amount);
+            System.out.println("you have successfully withdrawn $" + amount);
+        }else if (Math.abs(credit_Balance) == max_Credit){
+            System.out.println("Your account has reached Max Credit");
+
         }else{
-            System.out.println("Not enough funds to complete transaction, Please enter a smaller amount");
+            System.out.println("This withdraw will set you above your credit max, SORRY :( ");
         }
     }
 
@@ -100,29 +111,28 @@ public class Credit implements account{
      * @param amount
      * this method is for customers to send money to other bank costumers
      *
-     * this method takes 2 arguments an projectTwo.account object and double type variable
+     * this method takes 2 arguments an account object and double type variable
      */
     public void payment(account recipient, double amount) {
         //amount must be greater than 0.00 (also no overdraft allowed)
         if (recipient.get_Account_Num() != cred_Acc_Num && (recipient.get_Account_Num() % 1000) != (cred_Acc_Num % 1000)){
-            if (amount <= credit_Balance) {
+            if (recipient.deposit(amount)) {
                 withdraw(amount);
-                //accountType.deposit(amount);
-                BankLogger.payment_UwU(this, recipient, amount);
+                // BankLogger.payment_UwU(this, recipient, amount);
                 System.out.println("Success! (Payment)");
             }else{
-                System.out.println("Insufficient funds to make payment! Try transferring money or make a deposit");
+                System.out.println("Im sorry but recipient can not accept the payment ");
             }
         }else{
-            System.out.println("Please enter the projectTwo.account number of the user you are making a payment to!");
+            System.out.println("Please enter the account number of the user you are making a payment to! (CAN NOT MAKE payment to self");
         }
 
     }
 
     /**
      * @param amount
-     * this method is to transfer money from X projectTwo.account to Y projectTwo.account
-     * accountType is an object created in our main class that will hold the type of projectTwo.account we are modifying.
+     * this method is to transfer money from X account to Y account
+     * accountType is an object created in our main class that will hold the type of account we are modifying.
      */
     public void transfer(account account_Type,double amount) {
         //transfer needs to be greater than 0.00(no over draft allowed)
@@ -143,7 +153,7 @@ public class Credit implements account{
         System.out.println("Account Number: "+ this.cred_Acc_Num);
         System.out.println("\tprojectTwo.Credit Max: "+ this.max_Credit);
         System.out.println("\tBalance: " + this.credit_Balance);
-        BankLogger.inquire_balance_UwU(this);
+        //BankLogger.inquire_balance_UwU(this);
     }
 
 

@@ -66,11 +66,14 @@ public class Checking implements account{
      * apply to checkings and  to savings
      */
     @Override
-    public void deposit(double amount) {
+    public boolean deposit(double amount) {
+        boolean depos = false;
         if (amount >= 0.0){
             this.checking_bal += amount;
             BankLogger.deposit_UwU(this, amount);
+            depos = true;
         }
+        return depos;
     }
 
     /**

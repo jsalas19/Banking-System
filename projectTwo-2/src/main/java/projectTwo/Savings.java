@@ -43,16 +43,19 @@ public class Savings implements account{
      * @return void
      * @param amount the amount the userName is going to deposit
      */
-    public void deposit(double amount){
+    public boolean deposit(double amount){
+        boolean depos = false;
         //the deposit has to be geater than 0.00
         if(amount > 0.00){
             Savings_Balance = Savings_Balance + amount;
             BankLogger.deposit_UwU(this, amount);
-            System.out.println("You made a deposit of $" + amount);
+            depos = true;
+
         }
         else{
             System.out.println("You need more funds to complete a deposit.");
         }
+        return depos;
 
     } //end of deposit method.
     /**

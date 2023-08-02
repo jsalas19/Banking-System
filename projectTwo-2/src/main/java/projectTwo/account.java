@@ -13,7 +13,7 @@ interface account{
      * This method allows deposits as method implies
      * every projectTwo.account can deposit
      */
-    public void deposit(double amount) ;
+    public boolean deposit(double amount) ;
 
     /**
      * @param amount
