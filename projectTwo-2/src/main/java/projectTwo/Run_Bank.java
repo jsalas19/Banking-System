@@ -79,7 +79,7 @@ public class Run_Bank {
                             break;
                     }
 
-                    access = false;
+                    //access = false;
                 } else if (str.equals("1")) {
                     do {
                         System.out.println("1. Inquire Account By Customer Name.\n2. Inquire Account By Account Id\n3.End Session");
@@ -111,7 +111,7 @@ public class Run_Bank {
                     } while (!str.equals("3"));
 
                     System.out.println("GoodBYE!");
-                    access = false;
+                    //access = false;
                 }
             }
 
