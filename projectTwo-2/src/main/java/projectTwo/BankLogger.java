@@ -1,8 +1,5 @@
 package projectTwo;
 
-import projectTwo.account;
-
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
@@ -62,7 +59,7 @@ public class BankLogger {
 
     public static void openLog(){
         try {
-            logFile = new PrintWriter(new File("C:\\Users\\Joshua Salas\\IdeaProjects\\projectTwo-2\\src\\main\\java\\projectTwo\\logFile.txt"));
+            logFile = new PrintWriter("projectTwo-2/src/main/java/projectTwo/logFile.txt");
         } catch (FileNotFoundException e) {
             System.out.println("LogFile could not be created :( ... Exiting System.");
             System.exit(0);

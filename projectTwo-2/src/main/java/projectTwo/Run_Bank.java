@@ -21,7 +21,7 @@ public class Run_Bank {
 
     /**
      * @param args - default main method parameter.
-     * @throws CsvValidationException - required exception throw to ensure the file is a projectTwo.CSV file.
+     * @throws CsvValidationException - required exception throw to ensure the file is a CSV file.
      *                                This is our main method that drives the functionality of the system.
      */
     public static void main(String[] args) throws CsvValidationException {
@@ -127,65 +127,6 @@ public class Run_Bank {
 
     }
 
-    public static void add_new_user(Map<List<String>, Customer> data) {
-        Random rdm = new Random();
-        Scanner scr = new Scanner(System.in);
-        Customer new_Customer = new Customer();
-        String placeholder;
-        String[] strName;
-        do {
-            System.out.println("Enter First and Last Name (i.e. Joshua Salas, Joshua S):");
-            placeholder = scr.nextLine();
-            strName = placeholder.split(" ");
-            if (strName.length < 2) {
-                System.out.println("Please enter only your first and last name!");
-            }
-        } while (strName.length < 2);
-        new_Customer.set_First_name(strName[0]);
-        new_Customer.set_Last_name(strName[1]);
-
-        System.out.println("Enter your Date of Birth (i.e. 1-Jan-00):");
-        placeholder = scr.nextLine();
-        new_Customer.set_Date_of_birth(placeholder);
-
-        System.out.println("Enter your Address, City, State, Zip (ex. 500 W. University Ave, El Paso, TX 79968)");
-        placeholder = scr.nextLine();
-        new_Customer.set_Address(placeholder);
-
-        do {
-            System.out.println("Enter your Phone Number (ex: (999)999-999)");
-            placeholder = scr.nextLine();
-            if (placeholder.length() != 12) {
-                System.out.println("Please enter a phone number in the example format!");
-            }
-        } while (placeholder.length() != 12);
-
-        new_Customer.set_Phone_no(placeholder);
-        do {
-            System.out.println("What is your credit score? (must be between 300 and 850");
-            placeholder = scr.nextLine();
-            if (Integer.parseInt(placeholder) < 300 || Integer.parseInt(placeholder) > 850) {
-                System.out.println("Please enter a credit score in range!");
-            }
-        } while (Integer.parseInt(placeholder) < 300 || Integer.parseInt(placeholder) > 850);
-
-        int t = Integer.parseInt(placeholder);
-
-        if(t < 580){
-            new_Customer.get_Credit().set_Credit_Max(rdm.nextInt(100,699));
-        }else if (t > 581 && t < 669){
-            new_Customer.get_Credit().set_Credit_Max(rdm.nextInt(700,4999));
-        }else if (t > 670 && t < 739){
-            new_Customer.get_Credit().set_Credit_Max(rdm.nextInt(5000,7499));
-        }else if (t > 740 && t < 799){
-            new_Customer.get_Credit().set_Credit_Max(rdm.nextInt(7500,15999));
-        }else if (t > 800){
-            new_Customer.get_Credit().set_Credit_Max(rdm.nextInt(16000,25000));
-        }
-
-        new_Customer.get_Credit().set_Credit_Start_Bal(0.00);
-
-    }
 
     /**
      * This method displays the ALL account information
@@ -214,251 +155,25 @@ public class Run_Bank {
         //System.out.println("II am inside available actions specific");
         Scanner scr = new Scanner(System.in);
         //Initializing our String Variable her because we want our do while loop to have acess the account.
+
         String str = null;
-
-
         /*do while starts here, Allows the program to display our Menu until user decides to quit.*/
         do {
             switch (accountType.getClass().getTypeName()) {
-
-
-                //Inside projectTwo.Checking Account
+                //Inside Checking Account
                 case "projectTwo.Checking" -> {
-                    System.out.println("Make A selection:");
-                    System.out.println("1. Deposit \n2. Withdraw \n3. Payment \n4. Transfer \n5. View Balance \n6. Exit");
-                    str = scr.nextLine();
-                    Double amount;
-                    switch (str) {
-                        //Under Deposit option
-                        case "1":
-                            System.out.print("Enter Deposit Amount: $");
-                            str = scr.nextLine();
-                            System.out.println();
-                            amount = Double.parseDouble(str);
-                            accountType.deposit(amount);
-                            //accountType.display_account_info();
-                            break;
-                        //Under widthdraw Option
-                        case "2":
-                            System.out.print("Enter Withdraw Amount: $");
-                            str = scr.nextLine();
-                            //System.out.println();
-                            amount = Double.parseDouble(str);
-                            accountType.withdraw(amount);
-                            //accountType.display_account_info();
-                            //projectTwo.BankLogger.withdraw_UwU(accountType, amount);
-                            break;
-                        //Under Payment Option
-                        case "3":
-                            System.out.print("Enter Payment Amount: $");
-                            str = scr.nextLine();
-                            amount = Double.parseDouble(str);
-                            while (amount > accountType.balance()) {
-                                System.out.println("INSUFFICIENT FUNDS!! Try entering a new Payment amount:");
-                                str = scr.nextLine();
-                                amount = Double.parseDouble(str);
-                            }
-                            account pay_acc = CustomerFinder.find_specific_account(Prompts.prompt_account_type());
-                            if (pay_acc != null) {
-                                accountType.payment(pay_acc, amount);
-                                //accountType.display_account_info();
-                                //pay_acc.display_account_info();
-                            }
-                            //projectTwo.BankLogger.add("Account Payment: " + amount + " amount.");
-                            break;
-                        //Under Transfer Option
-                        case "4":
-                            System.out.println("Enter the amount you wish to Transfer:");
-                            str = scr.nextLine();
-                            amount = Double.parseDouble(str);
-                            System.out.println();
-                            account transferAccount = CustomerFinder.find_specific_account(Prompts.prompt_account_type());
-                            if (transferAccount != null) {
-                                accountType.transfer(transferAccount, amount);
-                                //accountType.display_account_info();
-                                //transferAccount.display_account_info();
-                            }
-                            //projectTwo.BankLogger.add("Account Transfer: " + amount + " amount.");
-                            break;
-                        //Under view Balance Option
-                        case "5":
-                            accountType.display_account_info();
-                            //projectTwo.BankLogger.add("Account inquire: " + accountType.balance() + " amount.");
-                            break;
-                        case "6":
-                            System.out.println("Thank You for banking with UTEP\n Goodbye!");
-                            break;
-                    }
+                    BankOperationCalls.switch_for_Sav_and_Check(accountType);
                 }
                 //Inside Savings Account
                 case "projectTwo.Savings" -> {
-                    System.out.println("Make A selection:");
-                    System.out.println("1. Deposit \n2. Withdraw \n3. Payment \n4. Transfer \n5. View Balance \n6. Exit");
-                    str = scr.nextLine();
-                    Double amount;
-
-                    switch (str) {
-                        //Under Deposit option
-                        case "1":
-                            //do {
-                            System.out.print("Enter Deposit Amount: $");
-                            str = scr.nextLine();
-                            System.out.println();
-                            amount = Double.parseDouble(str);
-                            accountType.deposit(amount);
-                            accountType.display_account_info();
-                            BankLogger.deposit_UwU(accountType, amount);
-                            break;
-                        //Under widthdraw Option
-                        case "2":
-                            System.out.print("Enter Withdraw Amount: $");
-                            str = scr.nextLine();
-                            //System.out.println();
-                            amount = Double.parseDouble(str);
-                            accountType.withdraw(amount);
-                            accountType.display_account_info();
-                            BankLogger.withdraw_UwU(accountType, amount);
-                            break;
-                        //Under Payment Option
-                        case "3":
-                            System.out.print("Enter Payment Amount: $");
-                            str = scr.nextLine();
-                            amount = Double.parseDouble(str);
-                            while (amount > accountType.balance()) {
-                                System.out.println("INSUFFICIENT FUNDS!! Try entering a new Payment amount:");
-                                str = scr.nextLine();
-                                amount = Double.parseDouble(str);
-                            }
-
-                            // System.out.println("What kind of account are we making a payment towards?");
-                            account pay_acc = CustomerFinder.find_specific_account(Prompts.prompt_account_type());
-                            if (pay_acc != null) {
-                                accountType.payment(pay_acc, amount);
-                                //projectTwo.BankLogger.add("OwO");
-                                accountType.display_account_info();
-                                pay_acc.display_account_info();
-                            }
-                            //projectTwo.BankLogger.add("Account Payment: " + amount + " amount.");
-                            break;
-                        //Under Transfer Option
-                        case "4":
-                            System.out.println("Enter the amount you wish to Transfer:");
-                            str = scr.nextLine();
-                            amount = Double.parseDouble(str);
-
-                            while (amount > accountType.balance()) {
-                                System.out.println("INSUFFICIENT FUNDS!! Try Entering a Different Amount");
-                                str = scr.nextLine();
-                                amount = Double.parseDouble(str);
-                            }
-                            //System.out.println();
-                            System.out.println("Choose recipient AccountType to Transfer Funds.");
-                            account transferAccount = CustomerFinder.find_specific_account(Prompts.prompt_account_type());
-                            if (transferAccount != null) {
-                                accountType.transfer(transferAccount, amount);
-                                accountType.display_account_info();
-                                transferAccount.display_account_info();
-                            }
-                            //projectTwo.BankLogger.add("Account Transfer: " + amount + " amount.");
-                            break;
-                        //Under view Balance Option
-                        case "5":
-                            accountType.display_account_info();
-                            //projectTwo.BankLogger.add("Account inquire: " + accountType.balance() + " amount.");
-                            break;
-                        case "6":
-                            System.out.println("Thank You for banking with UTEP\n Goodbye!");
-                            break;
-                    }
+                    BankOperationCalls.switch_for_Sav_and_Check(accountType);
                 }
-                //Inside Credit Account
+                    //Inside Credit Account
                 case "projectTwo.Credit" -> {
-                    //CreditAccount maxCredit = (CreditAccount) accountType;
-                    System.out.println("Make A selection:");
-                    System.out.println("1. Pay Balance \n2. Withdraw \n3. Payment \n4. Transfer \n5. View Balance \n6. Exit");
-                    str = scr.nextLine();
-                    Double amount;
-
-                    switch (str) {
-                        //Under Deposit option
-                        case "1":
-
-                            System.out.print("Enter Deposit Amount: $");
-                            str = scr.nextLine();
-                            amount = Double.parseDouble(str);
-                            if (accountType.balance() + amount > ((Credit) accountType).get_Credit_Max()) {
-                                System.out.println("Deposit DENIED. Account balance must remain below or euqal to your credit max of: " + ((Credit) accountType).get_Credit_Max());
-                                break;
-                            } else {
-                                accountType.deposit(amount);
-                                accountType.display_account_info();
-                            }
-                            break;
-                        //Under widthdraw Option
-                        case "2":
-                            System.out.print("Enter Withdraw Amount: $");
-                            str = scr.nextLine();
-                            amount = Double.parseDouble(str);
-
-                            if (accountType.balance() < 0) {
-                                System.out.print("Your Accounts balance is in the Negatives You can not Withdraw at this Time\n");
-
-                            } else {
-                                accountType.withdraw(amount);
-                                accountType.display_account_info();
-                            }
-                            BankLogger.withdraw_UwU(accountType, amount);
-                            break;
-                        //Under Payment Option
-                        case "3":
-                            System.out.print("Enter Payment Amount: $");
-                            str = scr.nextLine();
-                            amount = Double.parseDouble(str);
-                            if (amount > accountType.balance() || amount > ((Credit) accountType).balance()) {
-                                System.out.println("INSUFFICIENT FUNDS!!:");
-                            } else {
-                                System.out.println("What kind of account are we making a payment towards?");
-                                account pay_acc = CustomerFinder.find_specific_account(Prompts.prompt_account_type());
-                                if (pay_acc != null) {
-                                    accountType.payment(pay_acc, amount);
-                                    accountType.display_account_info();
-                                    pay_acc.display_account_info();
-                                }
-                            }
-                            break;
-                        //Under Transfer Option
-                        case "4":
-                            System.out.println("Enter the amount you wish to Transfer:");
-                            str = scr.nextLine();
-                            amount = Double.parseDouble(str);
-
-                            while (amount > accountType.balance() || amount > ((Credit) accountType).balance()) {
-                                System.out.println("INSUFFICIENT FUNDS!! Try Entering a Different Amount");
-                                str = scr.nextLine();
-                                amount = Double.parseDouble(str);
-                            }
-
-                            System.out.println("Choose recipient AccountType to Transfer Funds.");
-                            account transferAccount = CustomerFinder.find_specific_account(Prompts.prompt_account_type());
-                            if (transferAccount != null) {
-                                accountType.transfer(transferAccount, amount);
-                                accountType.display_account_info();
-                                transferAccount.display_account_info();
-                            }
-                            //projectTwo.BankLogger.add("Account Transfer: " + amount + " amount.");
-                            break;
-                        //Under view Balance Option
-                        case "5":
-                            accountType.display_account_info();
-                            //projectTwo.BankLogger.add("Account inquire: " + accountType.balance() + " amount.");
-                            break;
-                        case "6":
-                            System.out.println("Thank You for banking with UTEP\n Goodbye!");
-                            break;
-                    }
+                    BankOperationCalls.credit_switch_for_Sav_and_Check(accountType);
                 }
             }
-        } while (!str.equals("6"));
+        }while (!str.equals("6")) ;
 
     }
 }
