@@ -36,7 +36,7 @@ public class Run_Bank {
             while (access) {
                 String str;
                 String idString;
-                System.out.println("1. Access as Manager \n2. Access as Customer");
+                System.out.println("1. Access as Manager \n2. Access as Customer \n3. Exit the system, type [EXIT]");
                 str = scnr.nextLine();
                 if (str.equals("EXIT")) {
                     break;

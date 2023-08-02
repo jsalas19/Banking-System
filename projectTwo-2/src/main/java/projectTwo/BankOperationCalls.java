@@ -75,7 +75,9 @@ public class BankOperationCalls {
 
     public static void credit_switch_for_Sav_and_Check(account accountT){
         set_accountType(accountT);
-        String str = Prompts.make_selection_prompt_credit();
+        String str;
+        do {
+        str = Prompts.make_selection_prompt_credit();
         switch (str) {
             //Under Deposit option
             case "1":
@@ -100,7 +102,10 @@ public class BankOperationCalls {
             case "6":
                 System.out.println("Thank You for banking with UTEP\n Goodbye!");
                 break;
-        }
+            }
+        }while(!str.equals("6"));
+
+
     }
 
     public static void credit_deposit_call(){
