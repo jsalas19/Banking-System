@@ -13,6 +13,7 @@ public class CustomerMap {
     public static void read_data_UwU(String filePath) throws CsvValidationException, IOException {
         create_data = new CSV(filePath);
         create_customerMap(create_data.get_data());
+        IdSets.create_sets(create_data.get_data());
     }
     /**
      * This Method creates a Hashmap of customers that we can use to find a customer.
@@ -20,9 +21,8 @@ public class CustomerMap {
      */
     public static void create_customerMap(Map<String, List<String>> data){
         List<String> stringList = new ArrayList<>();
-
-
         for (int k = 0; k < data.get("Identification Number").size(); k++){
+
             stringList.add(data.get("Identification Number").get(k));
             stringList.add(data.get("First Name").get(k));
             stringList.add(data.get("Last Name").get(k));
@@ -95,20 +95,35 @@ public class CustomerMap {
         } while (Integer.parseInt(placeholder) < 300 || Integer.parseInt(placeholder) > 850);
 
         int t = Integer.parseInt(placeholder);
+        int r = 0;
 
         if(t < 580){
-            new_Customer.get_Credit().set_Credit_Max(rdm.nextInt(100,699));
+            r = rdm.nextInt(100,699);
         }else if (t > 581 && t < 669){
-            new_Customer.get_Credit().set_Credit_Max(rdm.nextInt(700,4999));
+            r = rdm.nextInt(700,4999);
         }else if (t > 670 && t < 739){
-            new_Customer.get_Credit().set_Credit_Max(rdm.nextInt(5000,7499));
+            r = rdm.nextInt(5000,7499);
         }else if (t > 740 && t < 799){
-            new_Customer.get_Credit().set_Credit_Max(rdm.nextInt(7500,15999));
+            r = rdm.nextInt(7500,15999);
         }else if (t > 800){
-            new_Customer.get_Credit().set_Credit_Max(rdm.nextInt(16000,25000));
+            r = rdm.nextInt(16000,25000);
         }
 
-        new_Customer.get_Credit().set_Credit_Start_Bal(0.00);
+        int set_acc_num = IdSets.Acc_Id_list.get(0)+1;
+        int set_id = IdSets.Id_list.get(0)+1;
+        while(IdSets.Id_set.contains(set_id)){
+            set_id += 1;
+        }
+        while(IdSets.Acc_Id_set.contains(set_acc_num)){
+            set_acc_num += 1;
+        }
+        new_Customer.set_IdNo(set_id);
+        new_Customer.set_Checking("1"+String.valueOf(set_acc_num),"0.00");
+        new_Customer.set_Savings("2"+String.valueOf(set_acc_num), "0.00");
+        new_Customer.set_Credit("3"+String.valueOf(set_acc_num), String.valueOf(r), "0.00");
 
+        List<String> keys = new ArrayList<String>(Arrays.asList(String.valueOf(set_id), strName[0], strName[1]));
+
+        data.put(keys, new_Customer);
     }
 }

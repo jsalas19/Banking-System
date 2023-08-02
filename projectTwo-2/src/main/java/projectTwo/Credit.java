@@ -86,8 +86,8 @@ public class Credit implements account{
      * this method is used to withdraw money
      */
     public void withdraw(double amount) {
-        if (Math.abs(credit_Balance) >= amount) {
-            credit_Balance = credit_Balance + amount;
+        if (Math.abs(credit_Balance) + amount < max_Credit) {
+            credit_Balance = credit_Balance - amount;
             BankLogger.withdraw_UwU(this, amount);
             System.out.println("you have successfully widthrawn $" + amount);
         }else{
