@@ -26,7 +26,7 @@ public class CustomerMap {
             stringList.add(data.get("Identification Number").get(k));
             stringList.add(data.get("First Name").get(k));
             stringList.add(data.get("Last Name").get(k));
-            //System.out.println(stringList);
+
             Customer customer = new Customer();
 
             customer.set_IdNo(customer.set_to_int(data.get("Identification Number").get(k)));

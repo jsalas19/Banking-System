@@ -14,20 +14,17 @@ public class CSV {
 
     CSV(){}
     CSV(String filePath) throws IOException, CsvValidationException {
-        try {
             read_CSV_File(filePath);
-        }catch(IOException e){
-            System.out.println(e);
-        }
     }
 
     public void read_CSV_File(String filePath) throws IOException, CsvValidationException {
         CSVReader reader = new CSVReader(new FileReader(filePath));
         String[] a;
-        List<String> stringList = new ArrayList<>();
+        //List<String> stringList = new ArrayList<>();
         String [] temp = reader.readNext();
 
         for (String j : temp){
+            //System.out.println(j);
             data.put(j, new ArrayList<>());
         }
         int k = 0;
