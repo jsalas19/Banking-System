@@ -17,8 +17,6 @@ import java.util.List;
  * user with the system.
  */
 public class Run_Bank {
-
-
     /**
      * @param args - default main method parameter.
      * @throws CsvValidationException - required exception throw to ensure the file is a CSV file.
