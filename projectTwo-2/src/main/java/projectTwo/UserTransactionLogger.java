@@ -2,11 +2,16 @@ package projectTwo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 public class UserTransactionLogger {
     private static PrintWriter logFile;
+    private static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+    private static LocalDateTime now = LocalDateTime.now();
 
     /**
      * Prints into the log file the action the user did on deposit on the user's file.
@@ -25,9 +30,7 @@ public class UserTransactionLogger {
      * @param amount the amount the user withdraw from its account.
      */
     public static void withdraw_UwU(account specificAccount, double amount) {
-        logFile.write(specificAccount.get_FullName() + " withdrew $" + amount + " in cash from " + check_Class(specificAccount) + "-"+ specificAccount.get_Account_Num() + ". ");
-        new_balance(specificAccount);
-        logFile.write("\n");
+        logFile.write(dtf.format(now) + "\tWithdrawal from: " + check_Class(specificAccount) + "-" + specificAccount.get_Account_Num() + "\t\t\t" + amount +"\n");
     }
 
     /**
@@ -37,11 +40,7 @@ public class UserTransactionLogger {
      * @param amount the amount the user is going to pay that account.
      */
     public static void payment_UwU(account paying, account recipient, double amount){
-        logFile.write(paying.get_FullName() + " paid " + recipient.get_FullName() + " $" + amount + "from " + check_Class(paying) +"-" + paying.get_Account_Num() + ". ");
-        new_balance(paying);
-        logFile.write(recipient.get_FullName() + " received $" + amount + " from " + paying.get_FullName() + ". ");
-        new_balance(recipient);
-        logFile.write("\n");
+        logFile.write(dtf.format(now) + "\tPayment to: " +  check_Class(recipient) + "-" + recipient.get_Account_Num() + "\t\t\t -" + amount + "\n");
     }
 
     /**
@@ -50,21 +49,8 @@ public class UserTransactionLogger {
      * @param transTo account that is receiving all the user movements
      * @param amount total amount that the user is transfering.
      */
-    public static void transfer_UwU(account transFrom, account transTo, double amount){
-        logFile.write(transFrom.get_FullName() + " transferred $" + amount + " from " + check_Class(transFrom) + "-" + transFrom.get_Account_Num() + " to " + check_Class(transTo) + "-" + transTo.get_Account_Num() + ". ");
-        new_balance(transFrom);
-        new_balance(transTo);
-        logFile.write("\n");
-    }
-
-    /**
-     * This method prints into the log file if the user wants to inquire his/her balance, to see the account from user and the balance.
-     * @param view the account from user.
-     */
-    public static void inquire_balance_UwU(account view){
-        logFile.write(view.get_FullName() + " made a balance inquiry on " + check_Class(view) + "-" + view.get_Account_Num() + ". ");
-        logFile.write(view.get_FullName() + "'s Balance for " + check_Class(view) + "-" + view.get_Account_Num() + ": " + view.balance());
-        logFile.write("\n");
+    public static void transfer_User(account transFrom, account transTo, double amount){
+        logFile.write(dtf.format(now) + "\tTransfer to: " +  check_Class(transTo) + "-" + transTo.get_Account_Num() + " From: " + check_Class(transFrom) + "-" + transFrom.get_Account_Num()+ "\t\t\t -" + amount + "\n");
     }
 
     /**
@@ -73,6 +59,16 @@ public class UserTransactionLogger {
      */
     public static void new_balance(account specificAccount){
         logFile.write(specificAccount.get_FullName() + "'s New Balance for " + check_Class(specificAccount) + "-" + specificAccount.get_Account_Num() + ": " + specificAccount.balance() + ". ");
+    }
+
+    /**
+            * This method prints into the log file if the user wants to inquire his/her balance, to see the account from user and the balance.
+            * @param view the account from user.
+     */
+    public static void inquire_balance_UwU(account view){
+        logFile.write(view.get_FullName() + " made a balance inquiry on " + check_Class(view) + "-" + view.get_Account_Num() + ". ");
+        logFile.write(view.get_FullName() + "'s Balance for " + check_Class(view) + "-" + view.get_Account_Num() + ": " + view.balance());
+        logFile.write("\n");
     }
 
     /**
@@ -97,20 +93,29 @@ public class UserTransactionLogger {
      * @param file the name of the user, complete name.
      */
     public static void openLog(String file) {
-
+        account user = null;
+        File f = new File(file + ".txt");
         try {
-            logFile = new PrintWriter(new File(file + ".txt"));
-            //logFile = new PrintWriter("/Users/mymac/Desktop/Advanced Obj. Oriented/projectTwo-2 4/projectTwo-2/src/main/java/projectTwo/UserTransactions.txt");
+            if (!f.isFile()) {
+                logFile = new PrintWriter(f);
+                add_user_information(user);
+            }
         } catch (FileNotFoundException e) {
             System.out.println("LogFile could not be created after several attempts... Exiting System.");
             System.exit(0);
         }
+    }
+    
+    public static void add_user_information(account user){
+        
     }
 
     /**
      * This method let us close the file. End of the file.
      */
     public static void closeLog() {
+        logFile.write("\n");
+        logFile.write("Ending Balance for " + now + "\t\t\t\t");
         logFile.close();
     }
 
