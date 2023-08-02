@@ -106,7 +106,10 @@ public class UserTransactionLogger {
     }
     
     public static void add_user_information(Customer user){
-        logFile.write(user.get_First_name() + " " + user.get_Last_name());
+        logFile.write("Account Name: " + user.get_First_name() + " " + user.get_Last_name() + "\n");
+        logFile.write("Account ID Number: " + user.get_Id_No() + "\n");
+        logFile.write("Date of Birth: " + user.get_Date_of_birth() + "\n");
+        logFile.write("Address: " + user.get_Address() + "\n");
 
     }
 
