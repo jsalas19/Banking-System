@@ -20,7 +20,7 @@ public class Run_Bank {
     /**
      * @param args - default main method parameter.
      * @throws CsvValidationException - required exception throw to ensure the file is a CSV file.
-     *                                This is our main method that drives the functionality of the system.
+     * This is our main method that drives the functionality of the system.
      */
     public static void main(String[] args) throws CsvValidationException {
 
@@ -41,7 +41,6 @@ public class Run_Bank {
                 if (str.equals("EXIT")) {
                     break;
                 } else if (str.equals("2")) {
-
                     System.out.println("1. Inquire by account name. \n2. Inquire by account type/number \n3. Exit");
                     str = scnr.nextLine();
                     switch (str) {
@@ -88,7 +87,6 @@ public class Run_Bank {
                             System.out.println("Whose account would you like to inquire about?: ");
                             str = scnr.nextLine();
                             List<String> strList = new ArrayList<>(List.of(str.split(" ")));
-
                             Customer left = CustomerFinder.find_account(strList.get(0), strList.get(1), strList.get(2));
                             if (left == null) {
                                 System.out.print("Customer does not exist");
@@ -100,7 +98,6 @@ public class Run_Bank {
                         } else if (str.equals("2")) {
                             System.out.println("Enter Customers ID Number");
                             str = scnr.nextLine();
-
                             Customer customer = CustomerFinder.find_account_ID(str);
                             if (customer == null) {
                                 System.out.println("Customer does not Exist");
@@ -113,7 +110,7 @@ public class Run_Bank {
                     System.out.println("GoodBYE!");
                     access = false;
                 }
-            }
+            } //end of the case(access).
 
             CustomerMap.write_to_CSV();
 
@@ -154,9 +151,9 @@ public class Run_Bank {
         Scanner scr = new Scanner(System.in);
         //Initializing our String Variable her because we want our do while loop to have acess the account.
 
-        String str = null;
+        //String str = null; not being used
         /*do while starts here, Allows the program to display our Menu until user decides to quit.*/
-        do {
+        //do {
             switch (accountType.getClass().getTypeName()) {
                 //Inside Checking Account
                 case "projectTwo.Checking" -> {
@@ -171,7 +168,7 @@ public class Run_Bank {
                     BankOperationCalls.credit_switch_for_Sav_and_Check(accountType);
                 }
             }
-        }while (!str.equals("6")) ;
+        //}while (!str.equals("6"));
 
     }
 }

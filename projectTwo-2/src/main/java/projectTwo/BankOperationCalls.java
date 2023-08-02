@@ -7,32 +7,38 @@ public class BankOperationCalls {
 
     public static void switch_for_Sav_and_Check(account accountT){
         set_accountType(accountT);
-        String str = Prompts.make_selection_prompt();
-        switch (str) {
-            //Under Deposit option
-            case "1":
-                BankOperationCalls.deposit_call();
-                break;
-            //Under widthdraw Option
-            case "2":
-                BankOperationCalls.withdraw_call();
-                break;
-            //Under Payment Option
-            case "3":
-                BankOperationCalls.payment_call();
-                break;
-            //Under Transfer Option
-            case "4":
-                BankOperationCalls.transfer_call();
-                break;
-            //Under view Balance Option
-            case "5":
-                accountType.display_account_info();
-                break;
-            case "6":
-                System.out.println("Thank You for banking with UTEP\n Goodbye!");
-                break;
-        }
+        String str;
+        do {
+            str = Prompts.make_selection_prompt();
+            switch (str) {
+                //Under Deposit option
+                case "1":
+                    BankOperationCalls.deposit_call();
+                    break;
+                //Under widthdraw Option
+                case "2":
+                    BankOperationCalls.withdraw_call();
+                    break;
+                //Under Payment Option
+                case "3":
+                    BankOperationCalls.payment_call();
+                    break;
+                //Under Transfer Option
+                case "4":
+                    BankOperationCalls.transfer_call();
+                    break;
+                //Under view Balance Option
+                case "5":
+                    accountType.display_account_info();
+                    break;
+                case "6":
+                    System.out.println("Thank You for banking with UTEP\n Goodbye!");
+                    break;
+            } //end of the switch
+        }while(!str.equals("6"));
+        CustomerFinder.find_specific_account(Prompts.prompt_account_type());
+        //Go back to the previous menu where it displays the Checkings, Savings, and Credit.
+        //Run_Bank.available_actions_specific(specified1);
     }
 
     public static void deposit_call(){

@@ -18,6 +18,7 @@ public class Prompts {
                     System.out.print("Terminating Session");
                     break;
                 default:
+                    System.out.println("Please enter a valid number.");
                     break;
             }
         }
@@ -36,9 +37,9 @@ public class Prompts {
 
     public static String make_selection_prompt(){
         Scanner scr = new Scanner(System.in);
-        System.out.println("Make A selection:");
-        System.out.println("1. Deposit \n2. Withdraw \n3. Payment \n4. Transfer \n5. View Balance \n6. Exit");
-        return scr.nextLine();
+            System.out.println("Make A selection:");
+            System.out.println("1. Deposit \n2. Withdraw \n3. Payment \n4. Transfer \n5. View Balance \n6. Exit");
+            return scr.nextLine();
     }
 
     public static Double enter_strInt_prompt(String prompt){

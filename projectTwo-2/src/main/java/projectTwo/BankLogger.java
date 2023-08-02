@@ -7,7 +7,6 @@ public class BankLogger {
 
     private static PrintWriter logFile;
 
-
     public static void deposit_UwU(account specificAccount, double amount){
         logFile.write(specificAccount.get_FullName() + " deposited " + amount + " to " + check_Class(specificAccount) + "-"+ specificAccount.get_Account_Num() + ". ");
         new_balance(specificAccount);
