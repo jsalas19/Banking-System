@@ -13,16 +13,20 @@ import java.util.Map;
 public class ManagerTransactionFileReader {
     private Map<String, List<String>> data = new HashMap<>();
 
+
+
     public void read_MT_File(String filePath) throws IOException, CsvValidationException {
         CSVReader reader = new CSVReader(new FileReader(filePath));
         String[] a;
         List<String> stringList = new ArrayList<>();
-        String [] temp = reader.readNext();
-
-        for (String j : temp){
+        String[] temp = reader.readNext();
+        //j is the header
+        for (String j : temp) {
+            System.out.println(j);
             data.put(j, new ArrayList<>());
         }
         int k = 0;
+        //transaction info
         while ((a = reader.readNext()) != null) {
             for (String i : a) {
                 data.get(temp[k]).add(i);
@@ -32,4 +36,8 @@ public class ManagerTransactionFileReader {
         }
 
     }
+
 }
+
+
+

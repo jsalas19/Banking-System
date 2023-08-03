@@ -24,7 +24,7 @@ public class CSV {
         String [] temp = reader.readNext();
 
         for (String j : temp){
-            //System.out.println(j);
+           // System.out.println(j);
             data.put(j, new ArrayList<>());
         }
         int k = 0;
@@ -37,6 +37,13 @@ public class CSV {
         }
 
     }
+
+    /**
+     * @param customer_Map
+     * @throws IOException
+     *
+     * Updates CSV with new information
+     */
 
     public void write_CSV_File(Map<List<String>, Customer> customer_Map) throws IOException {
         String log = "testCSV.csv";
