@@ -22,7 +22,7 @@ public class ManagerTransactionFileReader {
         String[] temp = reader.readNext();
         //j is the header
         for (String j : temp) {
-            System.out.println(j);
+            //System.out.println(j);
             TransCSV.put(j, new ArrayList<>());
         }
         int k = 0;

@@ -125,15 +125,15 @@ public class UserTransactionLogger {
      * @param accountType - account we are recording
      */
     public static void starting_balance(account accountType){
-        if(transaction != null) {
+        //if(transaction != null) {
             transaction.write("\n");
             transaction.write("-------- Starting Balance --------\n");
             transaction.write(check_Class(accountType) + "-" + accountType.get_Account_Num() + " Starting Balance: "+ accountType.balance() + "\n");
             transaction.write("\n");
             transaction.write("-------- Transactions --------\n");
-        }else{
-            System.out.println("Error: transaction is not initialized.");
-        }
+        //}else{
+            //System.out.println("Error: transaction is not initialized.");
+        //}
     }
 
     /**
@@ -154,32 +154,21 @@ public class UserTransactionLogger {
     }
     
     public static void add_user_information(Customer user){
-        if(transaction != null) {
             transaction.write("-------- Account Information --------\n");
             transaction.write("Account Name: " + user.get_First_name() + " " + user.get_Last_name() + "\n");
             transaction.write("Account ID Number: " + user.get_Id_No() + "\n");
             transaction.write("Date of Birth: " + user.get_Date_of_birth() + "\n");
             transaction.write("Address: " + user.get_Address() + "\n");
-        }
-        else{
-            System.out.println("Error: transaction is not initialized.");
-        }
-
     }
 
     /**
      * This method let us close the file. End of the file.
      */
     public static void closeLog(account specificAccount) {
-        if(transaction != null) {
             transaction.write("\n");
             transaction.write("-------- Ending Balance --------\n");
             transaction.write("Ending Balance for " + dtf.format(now) + "\t\t\t" + specificAccount.balance());
             transaction.close();
-        }
-        else{
-            System.out.println("Error: transaction is not initialized.");
-        }
     }
 
 

@@ -134,21 +134,23 @@ public class GenerateBankStatement {
      * @param user - allows the use/access of Customer attributes
      */
     public static void add_user_information(Customer user){
-        if(statementWriter != null) {
+        //if(statementWriter != null) {
             statementWriter.write("Account Name: " + user.get_First_name() + " " + user.get_Last_name() + "\n");
             statementWriter.write("Account ID Number: " + user.get_Id_No() + "\n");
             statementWriter.write("Date of Birth: " + user.get_Date_of_birth() + "\n");
             statementWriter.write("Address: " + user.get_Address() + "\n");
             statementWriter.write("\n");
-        }
-        else{
-            System.out.println("Error: transaction is not initialized.");
-        }
+        //}
+        //else{
+            //System.out.println("Error: transaction is not initialized.");
+        //}
 
     }
 
     public static void close_statement(account specificAccount){
         if(statementWriter != null) {
+            statementWriter.write("\n");
+            statementWriter.write("-------- Ending Balance --------\n");
             statementWriter.write("Ending Balance for " + dtf.format(now) + "\t\t\t" + specificAccount.balance());
             statementWriter.close();
         }
