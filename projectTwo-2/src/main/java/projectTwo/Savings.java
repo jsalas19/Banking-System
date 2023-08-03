@@ -86,19 +86,20 @@ public class Savings implements account{
      * @param amount the amount that is going to be paid from the user
      * @return
      */
-    public void payment(account recipient, double amount){
+    public boolean payment(account recipient, double amount){
         //the amount for the payment has to be less than the blance, if not,
         //not enough funds to pay someone else
+        boolean depos = false;
         if (recipient.get_Account_Num() != Sav_Acc_Num && (recipient.get_Account_Num() % 1000) != (Sav_Acc_Num % 1000)){
-            if(amount <= Savings_Balance){
+            if(amount <= Savings_Balance && recipient.deposit(amount) ){
                 withdraw(amount);
-                recipient.deposit(amount);
+                depos = true;
                 BankLogger.payment_UwU(this, recipient, amount);
                 UserTransactionLogger.payment_UwU(this, recipient, amount);
                 System.out.println("You have successfully made a payment of $" + amount + ". To another projectTwo.account");
             }
         }
-
+        return depos;
     } //end of the paySomeone method.
 
     /**
@@ -106,13 +107,14 @@ public class Savings implements account{
      * @param amount amount is going to transfer from the projectOne.projectTwo.Checking projectTwo.account to projectOne.projectTwo.Savings projectTwo.account
      * @return
      */
-    public void transfer(account accoType, double amount){
+    public boolean transfer(account accoType, double amount){
         //the amount has to be less than the total balance in order to transfer the money
         //otherwise, not enough funds to transfer money.
+        boolean depos = false;
         if (accoType.get_Account_Num() != Sav_Acc_Num && (accoType.get_Account_Num() % 100) == (Sav_Acc_Num % 100)){
-            if(amount <= Savings_Balance){
+            if(amount <= Savings_Balance && accoType.deposit(amount)){
                 withdraw(amount);
-                accoType.deposit(amount);
+                depos = true;
                 BankLogger.transfer_UwU(this, accoType, amount);
                 UserTransactionLogger.transfer_User(this, accoType, amount);
                 System.out.println("You have successfully transfered $" + amount + " to this projectTwo.account.");
@@ -122,6 +124,7 @@ public class Savings implements account{
                 System.out.println("Transaction has failed. Enter a smaller amount");
             }
         }
+        return depos;
 
     } //end of the transferMoney method.
 

@@ -29,7 +29,7 @@ interface account{
      * This method allows Payments as method implies
      * every projectTwo.account can withdraw
      */
-    public void payment(account recipient ,double amount);
+    public boolean payment(account recipient ,double amount);
 
     /**
      * @param amount
@@ -37,7 +37,7 @@ interface account{
      * every projectTwo.account can withdraw
      */
 
-    public void transfer(account accountType, double amount);
+    public boolean transfer(account accountType, double amount);
 
     /**
      * @return a variable of type double which in our concrete methods in our other classes will be named "balance"
@@ -45,7 +45,7 @@ interface account{
     public double balance();
 
     /**
-     * This method is to print a customers projectTwo.account balance and projectTwo.account number after each transaction
+     * This method is to print a customers account balance and account number after each transaction
      * Our credit class takes this method a step foward and displays the coounts credit Max as well.
      */
     public void display_account_info();

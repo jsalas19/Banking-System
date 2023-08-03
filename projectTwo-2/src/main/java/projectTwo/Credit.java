@@ -82,6 +82,7 @@ public class Credit implements account{
             credit_Balance = credit_Balance + amount;
             BankLogger.deposit_UwU(this, amount);
             UserTransactionLogger.deposit_UwU1(this, amount);
+            GenerateBankStatement.deposit_UwU(this,amount);
             System.out.println("You made a deposit of $" + amount);
             depos = true;
         } else {
@@ -115,7 +116,8 @@ public class Credit implements account{
      *
      * this method takes 2 arguments an account object and double type variable
      */
-    public void payment(account recipient, double amount) {
+    public boolean payment(account recipient, double amount) {
+        boolean depos = false;
         //amount must be greater than 0.00 (also no overdraft allowed)
         if (recipient.get_Account_Num() != cred_Acc_Num && (recipient.get_Account_Num() % 1000) != (cred_Acc_Num % 1000)){
             if (recipient.deposit(amount)) {
@@ -123,13 +125,14 @@ public class Credit implements account{
                 BankLogger.payment_UwU(this, recipient, amount);
                 UserTransactionLogger.payment_UwU(this, recipient, amount);
                 System.out.println("Success! (Payment)");
+                depos = true;
             }else{
                 System.out.println("Im sorry but recipient can not accept the payment ");
             }
         }else{
             System.out.println("Please enter the account number of the user you are making a payment to! (CAN NOT MAKE payment to self");
         }
-
+        return depos;
     }
 
     /**
@@ -137,19 +140,21 @@ public class Credit implements account{
      * this method is to transfer money from X account to Y account
      * accountType is an object created in our main class that will hold the type of account we are modifying.
      */
-    public void transfer(account account_Type,double amount) {
+    public boolean transfer(account account_Type,double amount) {
         //transfer needs to be greater than 0.00(no over draft allowed)
+        boolean depos = false;
         if (account_Type.get_Account_Num() != cred_Acc_Num && (account_Type.get_Account_Num() % 1000) == (cred_Acc_Num % 1000)) {
-            if (amount <= credit_Balance) {
+            if (amount <= credit_Balance && account_Type.deposit(amount )) {
                 withdraw(amount);
-                account_Type.deposit(amount);
                 BankLogger.transfer_UwU(this, account_Type, amount);
                 UserTransactionLogger.transfer_User(this, account_Type, amount);
                 System.out.println("Success! (Transfer)");
+                depos = true;
             } else {
                 System.out.println("Transaction has failed!");
             }
         }
+        return depos;
     }
 
     @Override

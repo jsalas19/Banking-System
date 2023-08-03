@@ -104,17 +104,19 @@ public class Checking implements account{
      * apply to checkings, saving and credit
      */
     @Override
-    public void payment(account recipient, double amount) {
+    public boolean payment(account recipient, double amount) {
+        boolean depos = false;
         if (recipient.get_Account_Num() != checking_account_no && (recipient.get_Account_Num() % 1000) != (checking_account_no % 1000)){
-            if (amount <= this.checking_bal) {
+            if (amount <= this.checking_bal && recipient.deposit(amount )){
                 withdraw(amount);
-                recipient.deposit(amount);
+                depos = true;
                 BankLogger.payment_UwU(this, recipient, amount);
                 UserTransactionLogger.payment_UwU(this, recipient, amount);
                 System.out.println("Success! (payment)");
             }
             System.out.println("Failed! (payment)");
         }
+        return depos;
     }
 
     /**
@@ -126,17 +128,19 @@ public class Checking implements account{
      * apply to projectOne.checking, saving and credit
      */
     @Override
-    public void transfer(account account_Type,double amount) {
+    public boolean transfer(account account_Type,double amount) {
+        boolean depos = false;
         if (account_Type.get_Account_Num() != checking_account_no && (account_Type.get_Account_Num() % 1000) == (checking_account_no % 1000)) {
-            if (amount <= this.checking_bal) {
+            if (amount <= this.checking_bal && account_Type.deposit(amount)); {
                 withdraw(amount);
-                account_Type.deposit(amount);
+                depos = true;
                 BankLogger.transfer_UwU(this, account_Type, amount);
                 UserTransactionLogger.transfer_User(this, account_Type, amount);
                 System.out.println("Success! (transfer)");
             }
             System.out.println("Failed! (transfer)");
         }
+        return depos;
     }
 
     @Override
