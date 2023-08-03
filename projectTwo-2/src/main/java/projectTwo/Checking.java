@@ -71,7 +71,6 @@ public class Checking implements account{
         if (amount >= 0.0){
             this.checking_bal += amount;
             BankLogger.deposit_UwU(this, amount);
-            //UserTransactionLogger.deposit_UwU1(this, amount);
             depos = true;
         }
         return depos;

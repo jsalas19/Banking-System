@@ -9,13 +9,11 @@ import java.time.format.DateTimeFormatter;
 
 
 public class UserTransactionLogger {
-    private static PrintWriter logFile;
+    private static PrintWriter transaction;
     private static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
     private static LocalDateTime now = LocalDateTime.now();
 
-    public static void initLogFile(PrintWriter writer) {
-        logFile = writer;
-    }
+
 
     /**
      * Prints into the log file the action the user did on deposit on the user's file.
@@ -23,13 +21,13 @@ public class UserTransactionLogger {
      * @param amount this is possible to input the right amount the user deposit into an account.
      */
     public static void deposit_UwU1(account specificAccount, double amount){
-        //if(logFile != null) {
-            logFile.write(specificAccount.get_FullName() + " deposited $" + amount + " to " + check_Class(specificAccount) + "-" + specificAccount.get_Account_Num() + ". ");
+        //if(transaction != null) {
+            transaction.write(specificAccount.get_FullName() + " deposited $" + amount + " to " + check_Class(specificAccount) + "-" + specificAccount.get_Account_Num() + ". ");
             new_balance(specificAccount);
-            logFile.write("\n");
+            transaction.write("\n");
 //        }
 //        else{
-//            System.out.println("Error: logFile is not initialized.");
+//            System.out.println("Error: transaction is not initialized.");
 //        }
     }
 
@@ -39,7 +37,7 @@ public class UserTransactionLogger {
      * @param amount the amount the user withdraw from its account.
      */
     public static void withdraw_UwU(account specificAccount, double amount) {
-        logFile.write(dtf.format(now) + "\tWithdrawal from: " + check_Class(specificAccount) + "-" + specificAccount.get_Account_Num() + "\t\t\t" + amount +"\n");
+        transaction.write(dtf.format(now) + "\tWithdrawal from: " + check_Class(specificAccount) + "-" + specificAccount.get_Account_Num() + "\t\t\t" + amount +"\n");
     }
 
     /**
@@ -49,7 +47,7 @@ public class UserTransactionLogger {
      * @param amount the amount the user is going to pay that account.
      */
     public static void payment_UwU(account paying, account recipient, double amount){
-        logFile.write(dtf.format(now) + "\tPayment to: " +  check_Class(recipient) + "-" + recipient.get_Account_Num() + "\t\t\t -" + amount + "\n");
+        transaction.write(dtf.format(now) + "\tPayment to: " +  check_Class(recipient) + "-" + recipient.get_Account_Num() + "\t\t\t -" + amount + "\n");
     }
 
     /**
@@ -59,7 +57,7 @@ public class UserTransactionLogger {
      * @param amount total amount that the user is transfering.
      */
     public static void transfer_User(account transFrom, account transTo, double amount){
-        logFile.write(dtf.format(now) + "\tTransfer to: " +  check_Class(transTo) + "-" + transTo.get_Account_Num() + " From: " + check_Class(transFrom) + "-" + transFrom.get_Account_Num()+ "\t\t\t -" + amount + "\n");
+        transaction.write(dtf.format(now) + "\tTransfer to: " +  check_Class(transTo) + "-" + transTo.get_Account_Num() + " From: " + check_Class(transFrom) + "-" + transFrom.get_Account_Num()+ "\t\t\t -" + amount + "\n");
     }
 
     /**
@@ -67,7 +65,7 @@ public class UserTransactionLogger {
      * @param specificAccount any account from the user, can be Savings, Checking or Credit.
      */
     public static void new_balance(account specificAccount){
-        logFile.write(specificAccount.get_FullName() + "'s New Balance for " + check_Class(specificAccount) + "-" + specificAccount.get_Account_Num() + ": " + specificAccount.balance() + ". ");
+        transaction.write(specificAccount.get_FullName() + "'s New Balance for " + check_Class(specificAccount) + "-" + specificAccount.get_Account_Num() + ": " + specificAccount.balance() + ". ");
     }
 
     /**
@@ -75,9 +73,9 @@ public class UserTransactionLogger {
             * @param view the account from user.
      */
     public static void inquire_balance_UwU(account view){
-        logFile.write(view.get_FullName() + " made a balance inquiry on " + check_Class(view) + "-" + view.get_Account_Num() + ". ");
-        logFile.write(view.get_FullName() + "'s Balance for " + check_Class(view) + "-" + view.get_Account_Num() + ": " + view.balance());
-        logFile.write("\n");
+        transaction.write(view.get_FullName() + " made a balance inquiry on " + check_Class(view) + "-" + view.get_Account_Num() + ". ");
+        transaction.write(view.get_FullName() + "'s Balance for " + check_Class(view) + "-" + view.get_Account_Num() + ": " + view.balance());
+        transaction.write("\n");
     }
 
     /**
@@ -105,30 +103,31 @@ public class UserTransactionLogger {
         File f = new File(file + ".txt");
         try {
             if (!f.isFile()) {
-                logFile = new PrintWriter(f);
+                transaction = new PrintWriter(f);
                 add_user_information(user);
             }
         } catch (FileNotFoundException e) {
-            System.out.println("LogFile could not be created after several attempts... Exiting System.");
+            System.out.println("transaction could not be created after several attempts... Exiting System.");
             System.exit(0);
         }
     }
     
     public static void add_user_information(Customer user){
-        logFile.write("Account Name: " + user.get_First_name() + " " + user.get_Last_name() + "\n");
-        logFile.write("Account ID Number: " + user.get_Id_No() + "\n");
-        logFile.write("Date of Birth: " + user.get_Date_of_birth() + "\n");
-        logFile.write("Address: " + user.get_Address() + "\n");
+        transaction.write("Account Name: " + user.get_First_name() + " " + user.get_Last_name() + "\n");
+        transaction.write("Account ID Number: " + user.get_Id_No() + "\n");
+        transaction.write("Date of Birth: " + user.get_Date_of_birth() + "\n");
+        transaction.write("Address: " + user.get_Address() + "\n");
 
     }
 
     /**
      * This method let us close the file. End of the file.
      */
-    public static void closeLog() {
-        //logFile.write("\n");
-       // logFile.write("Ending Balance for " + now + "\t\t\t\t");
-        logFile.close();
+    public static void closeLog(account specificAccount) {
+        transaction.write("\n");
+        transaction.write("Starting balance: ");
+        transaction.write("Ending Balance for " + dtf.format(now) + "\t\t\t" + specificAccount.balance());
+        transaction.close();
     }
 
 

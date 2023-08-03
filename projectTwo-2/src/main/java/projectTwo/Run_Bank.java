@@ -60,9 +60,10 @@ public class Run_Bank {
                                         if (specifiedA != null) {
                                             available_actions_specific(specifiedA);
                                         }
+                                        UserTransactionLogger.closeLog(specifiedA);
                                     }
                                 }
-                                UserTransactionLogger.closeLog();
+                                //UserTransactionLogger.closeLog();
                             }
                             break;
 
