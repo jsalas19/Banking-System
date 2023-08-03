@@ -1,0 +1,17 @@
+-------- Account Information --------
+Account Name: Daniel A
+Account ID Number: 79
+Date of Birth: 5-Mar-39
+Address: 500 W. University Ave, El Paso, TX 79968
+Daniel A made a balance inquiry on Credit-3078. Daniel A's Balance for Credit-3078: -786.93
+
+-------- Starting Balance --------
+Credit-3078 Starting Balance: -786.93
+
+-------- Transactions --------
+Daniel A deposited $100.0 to Credit-3078. 
+Daniel A's New Balance for Credit-3078: -686.93. 
+08/03/2023	Withdrawal from: Credit-3078			150.0
+
+-------- Ending Balance --------
+Ending Balance for 08/03/2023			-836.93

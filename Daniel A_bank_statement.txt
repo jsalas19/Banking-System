@@ -1,0 +1,7 @@
+Account Name: Daniel A
+Account ID Number: 79
+Date of Birth: 5-Mar-39
+Address: 500 W. University Ave, El Paso, TX 79968
+
+08/03/2023	Deposit to: Credit-3078		+100.0
+Ending Balance for 08/03/2023			-836.93
