@@ -100,6 +100,7 @@ public class Credit implements account{
             credit_Balance = credit_Balance -amount;
             BankLogger.withdraw_UwU(this, amount);
             UserTransactionLogger.withdraw_UwU(this, amount);
+            GenerateBankStatement.withdraw_UwU(this,amount);
             System.out.println("you have successfully withdrawn $" + amount);
         }else if (Math.abs(credit_Balance) == max_Credit){
             System.out.println("Your account has reached Max Credit");
@@ -124,6 +125,7 @@ public class Credit implements account{
                 withdraw(amount);
                 BankLogger.payment_UwU(this, recipient, amount);
                 UserTransactionLogger.payment_UwU(this, recipient, amount);
+                GenerateBankStatement.payment_UwU(this,recipient, amount);
                 System.out.println("Success! (Payment)");
                 depos = true;
             }else{
@@ -148,6 +150,7 @@ public class Credit implements account{
                 withdraw(amount);
                 BankLogger.transfer_UwU(this, account_Type, amount);
                 UserTransactionLogger.transfer_User(this, account_Type, amount);
+                GenerateBankStatement.transfer_User(this, account_Type, amount);
                 System.out.println("Success! (Transfer)");
                 depos = true;
             } else {
