@@ -32,6 +32,7 @@ public class Run_Bank {
             CustomerMap.read_data_UwU("projectTwo-2/src/main/java/projectTwo/CS 3331 - Bank Users (2).csv");
 
             //Map<List<String>, Customer> customerMap = create_customerMap(create_data.get_data());
+            boolean randomBool = true;
             boolean access = true;
             while (access) {
                 String str;
@@ -103,8 +104,10 @@ public class Run_Bank {
                             }
                         }
                     } while (!str.equals("3"));
-
-                    System.out.println("GoodBYE!");
+                    if(!randomBool) {
+                        ManagerTransactionFileReader.read_MT_File("projectTwo-2/src/main/java/projectTwo/Transactions.csv");
+                        randomBool = false;
+                    }//System.out.println("GoodBYE!");
                     //access = false;
                 }
             } //end of the case(access).
@@ -151,20 +154,21 @@ public class Run_Bank {
         //String str = null; not being used
         /*do while starts here, Allows the program to display our Menu until user decides to quit.*/
         //do {
-            switch (accountType.getClass().getTypeName()) {
-                //Inside Checking Account
-                case "projectTwo.Checking" -> {
-                    BankOperationCalls.switch_for_Sav_and_Check(accountType);
-                }
-                //Inside Savings Account
-                case "projectTwo.Savings" -> {
-                    BankOperationCalls.switch_for_Sav_and_Check(accountType);
-                }
-                    //Inside Credit Account
-                case "projectTwo.Credit" -> {
-                    BankOperationCalls.credit_switch_for_Sav_and_Check(accountType);
-                }
+        UserTransactionLogger.starting_balance(accountType);
+        switch (accountType.getClass().getTypeName()) {
+            //Inside Checking Account
+            case "projectTwo.Checking" -> {
+                BankOperationCalls.switch_for_Sav_and_Check(accountType);
             }
+            //Inside Savings Account
+            case "projectTwo.Savings" -> {
+                BankOperationCalls.switch_for_Sav_and_Check(accountType);
+            }
+                //Inside Credit Account
+            case "projectTwo.Credit" -> {
+                BankOperationCalls.credit_switch_for_Sav_and_Check(accountType);
+            }
+        }
         //}while (!str.equals("6"));
 
     }

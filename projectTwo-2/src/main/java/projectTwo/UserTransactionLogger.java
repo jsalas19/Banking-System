@@ -92,7 +92,11 @@ public class UserTransactionLogger {
             case "projectTwo.Savings":
                 return "Savings";
         }
-        return " ";
+        return null;
+    }
+
+    public static void starting_balance(account accountType){
+        transaction.write(check_Class(accountType) + "-" + accountType.get_Account_Num() + " Starting Balance: "+ accountType.balance());
     }
 
     /**
@@ -124,8 +128,6 @@ public class UserTransactionLogger {
      * This method let us close the file. End of the file.
      */
     public static void closeLog(account specificAccount) {
-        transaction.write("\n");
-        transaction.write("Starting balance: ");
         transaction.write("Ending Balance for " + dtf.format(now) + "\t\t\t" + specificAccount.balance());
         transaction.close();
     }
