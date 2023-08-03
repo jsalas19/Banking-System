@@ -47,7 +47,7 @@ public class CSV {
 
     public void write_CSV_File(Map<List<String>, Customer> customer_Map) throws IOException {
         String log = "testCSV.csv";
-        String[] strings = {"Identification Number","First Name","Last Name","Date of Birth","Address","Phone Number","projectTwo.Checking Account Number","projectTwo.Checking Balance","projectTwo.Savings Account Number","projectTwo.Savings Balance","projectTwo.Credit Account Number","projectTwo.Credit Max","projectTwo.Credit Balance"};
+        String[] strings = {"Identification Number","First Name","Last Name","Date of Birth","Address","Phone Number","Checking Account Number","Checking Balance","Savings Account Number","Savings Balance","Credit Account Number","Credit Max","Credit Balance"};
         List<String[]> header = new ArrayList<>();
         header.add(strings);
         CSVWriter csv_Writer = new CSVWriter(new FileWriter(log));

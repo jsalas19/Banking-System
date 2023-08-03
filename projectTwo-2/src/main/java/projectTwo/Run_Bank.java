@@ -65,9 +65,10 @@ public class Run_Bank {
                                         account specifiedA = Prompts.return_selected_accountType(left, Prompts.prompt_account_type());
                                         if (specifiedA != null) {
                                             available_actions_specific(specifiedA);
+                                            UserTransactionLogger.closeLog(specifiedA);
+                                            GenerateBankStatement.close_statement(specifiedA);
                                         }
-                                        UserTransactionLogger.closeLog(specifiedA);
-                                        GenerateBankStatement.close_statement(specifiedA);
+
                                     }
                                 }
                                 //UserTransactionLogger.closeLog();
@@ -77,8 +78,14 @@ public class Run_Bank {
                         case "2":
                             account specified = CustomerFinder.find_specific_account(Prompts.prompt_account_type());
                             assert specified != null;
+                            Customer user = CustomerFinder.find_specific_account_Customer(String.valueOf(specified.get_Account_Num()));
+                            assert user != null;
+                            UserTransactionLogger.openLog(specified.get_FullName(),user);
+                            GenerateBankStatement.create_Bank_Statement(specified.get_FullName(),user);
                             specified.display_account_info();
                             available_actions_specific(specified);
+                            UserTransactionLogger.closeLog(specified);
+                            GenerateBankStatement.close_statement(specified);
                             break;
                     }
 
@@ -110,7 +117,7 @@ public class Run_Bank {
                             }
                         }
                     } while (!str.equals("3"));
-                    if(!randomBool) {
+                    if(randomBool) {
                         ManagerTransactionFileReader.read_MT_File("projectTwo-2/src/main/java/projectTwo/Transactions.csv");
                         randomBool = false;
                     }

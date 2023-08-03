@@ -75,4 +75,35 @@ public class CustomerFinder {
         }
         return null;
     }
+
+    public static Customer find_specific_account_Customer(String i){
+        Scanner scr = new Scanner(System.in);
+        //System.out.println("What is the account number? \nEnter Account Number: ");
+        int j = Integer.parseInt(i)/1000;
+        switch (j) {
+            case 1:
+                for (List<String> s : CustomerMap.get_CustomerMap().keySet()) {
+                    //System.out.println(s);
+                    if (String.valueOf(CustomerMap.get_CustomerMap().get(s).get_Checking().get_Account_Num()).equals(i)) {
+                        return CustomerMap.get_CustomerMap().get(s);
+                    }
+                }
+                break;
+            case 2:
+                for (List<String> s : CustomerMap.get_CustomerMap().keySet()) {
+                    if (String.valueOf(CustomerMap.get_CustomerMap().get(s).get_Savings().get_Account_Num()).equals(i)) {
+                        return CustomerMap.get_CustomerMap().get(s);
+                    }
+                }
+                break;
+            case 3:
+                for (List<String> s : CustomerMap.get_CustomerMap().keySet()) {
+                    if (String.valueOf(CustomerMap.get_CustomerMap().get(s).get_Credit().get_Account_Num()).equals(i)) {
+                        return CustomerMap.get_CustomerMap().get(s);
+                    }
+                }
+                break;
+        }
+        return null;
+    }
 }
