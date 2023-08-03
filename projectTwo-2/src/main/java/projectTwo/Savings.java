@@ -61,9 +61,9 @@ public class Savings implements account{
 
     } //end of deposit method.
     /**
-     * This method is for withdraw money from savings projectTwo.account and updates the current
-     * balance of the savings projectTwo.account after withdraw money.
-     * @param amount the amount the user wants to withdraw money from her/his savings projectTwo.account
+     * This method is for withdraw money from savings account and updates the current
+     * balance of the savings account after withdraw money.
+     * @param amount the amount the user wants to withdraw money from her/his savings account
      * @return String
      */
     public void withdraw(double amount){
@@ -85,7 +85,7 @@ public class Savings implements account{
 
     /**
      * This method is for payments, the user can make a payment for either their
-     * checkings, savings or credit projectTwo.account.
+     * checkings, savings or credit account.
      * @param amount the amount that is going to be paid from the user
      * @return
      */
@@ -107,8 +107,8 @@ public class Savings implements account{
     } //end of the paySomeone method.
 
     /**
-     * This method transfer money from savings projectTwo.account to another person's projectTwo.account
-     * @param amount amount is going to transfer from the projectOne.projectTwo.Checking projectTwo.account to projectOne.projectTwo.Savings projectTwo.account
+     * This method transfer money from savings account to another person's account
+     * @param amount amount is going to transfer from the Checking account to Savings account
      * @return
      */
     public boolean transfer(account accoType, double amount){

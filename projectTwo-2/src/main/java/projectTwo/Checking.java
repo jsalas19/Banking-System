@@ -140,7 +140,7 @@ public class Checking implements account{
                 BankLogger.transfer_UwU(this, account_Type, amount);
                 UserTransactionLogger.transfer_User(this, account_Type, amount);
                 GenerateBankStatement.transfer_User(this, account_Type, amount);
-                GenerateBankStatement.transfer_User(this,account_Type, amount);
+
                 System.out.println("Success! (transfer)");
             }
             System.out.println("Failed! (transfer)");

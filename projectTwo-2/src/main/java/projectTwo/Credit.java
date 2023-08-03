@@ -124,7 +124,7 @@ public class Credit implements account{
             if (recipient.deposit(amount)) {
                 withdraw(amount);
                 BankLogger.payment_UwU(this, recipient, amount);
-                UserTransactionLogger.payment_UwU(this, recipient, amount);
+                //UserTransactionLogger.payment_UwU(this, recipient, amount);
                 GenerateBankStatement.payment_UwU(this,recipient, amount);
                 System.out.println("Success! (Payment)");
                 depos = true;
@@ -166,7 +166,7 @@ public class Credit implements account{
         System.out.println("\tprojectTwo.Credit Max: "+ this.max_Credit);
         System.out.println("\tBalance: " + this.credit_Balance);
         BankLogger.inquire_balance_UwU(this);
-        UserTransactionLogger.inquire_balance_UwU(this);
+        //UserTransactionLogger.inquire_balance_UwU(this);
     }
 
 
