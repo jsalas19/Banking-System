@@ -49,17 +49,25 @@ public class ManagerTransactionFileReader {
                 case "pays":
                     account fromAcct = customer_account_switch(CustomerFinder.find_account(TransCSV.get("From First Name").get(i),TransCSV.get("From Last Name").get(i)), TransCSV.get("From Where").get(i));
                     account toAcct = customer_account_switch(CustomerFinder.find_account(TransCSV.get("To First Name").get(i), TransCSV.get("To Last Name").get(i)), TransCSV.get("To Where").get(i));
+                    assert fromAcct != null;
                     fromAcct.payment(toAcct, Integer.parseInt(TransCSV.get("Action Amount").get(i)));
                 case "withdraws":
                     account with = customer_account_switch(CustomerFinder.find_account(TransCSV.get("From First Name").get(i),TransCSV.get("From Last Name").get(i)), TransCSV.get("From Where").get(i));
+                    assert with != null;
                     with.withdraw(Integer.parseInt(TransCSV.get("Action Amount").get(i)));
-                case "deposit":
+                case "deposits":
                     account depo = customer_account_switch(CustomerFinder.find_account(TransCSV.get("From First Name").get(i),TransCSV.get("From Last Name").get(i)), TransCSV.get("From Where").get(i));
+                    assert depo != null;
                     depo.deposit(Integer.parseInt(TransCSV.get("Action Amount").get(i)));
                 case "transfers":
                     account fromSameAcct = customer_account_switch(CustomerFinder.find_account(TransCSV.get("From First Name").get(i),TransCSV.get("From Last Name").get(i)), TransCSV.get("From Where").get(i));
                     account toSameAcct = customer_account_switch(CustomerFinder.find_account(TransCSV.get("To First Name").get(i), TransCSV.get("To Last Name").get(i)), TransCSV.get("To Where").get(i));
+                    assert fromSameAcct != null;
                     fromSameAcct.transfer(toSameAcct, Integer.parseInt(TransCSV.get("Action Amount").get(i)));
+                case "inquires":
+                    account inq = customer_account_switch(CustomerFinder.find_account(TransCSV.get("From First Name").get(i),TransCSV.get("From Last Name").get(i)), TransCSV.get("From Where").get(i));
+                    assert inq != null;
+                    inq.display_account_info();
             }
         }catch (NullPointerException e){
             System.out.println("This operation did not work");

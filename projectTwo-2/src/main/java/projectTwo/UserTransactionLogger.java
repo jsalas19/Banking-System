@@ -97,7 +97,6 @@ public class UserTransactionLogger {
 
     public static void starting_balance(account accountType){
         transaction.write(check_Class(accountType) + "-" + accountType.get_Account_Num() + " Starting Balance: "+ accountType.balance());
-
     }
 
     /**
