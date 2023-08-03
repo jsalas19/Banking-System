@@ -21,14 +21,14 @@ public class UserTransactionLogger {
      * @param amount this is possible to input the right amount the user deposit into an account.
      */
     public static void deposit_UwU1(account specificAccount, double amount){
-        //if(transaction != null) {
+        if(transaction != null) {
             transaction.write(specificAccount.get_FullName() + " deposited $" + amount + " to " + check_Class(specificAccount) + "-" + specificAccount.get_Account_Num() + ". \n");
             new_balance(specificAccount);
             transaction.write("\n");
-//        }
-//        else{
-//            System.out.println("Error: transaction is not initialized.");
-//        }
+        }
+        else{
+            System.out.println("Error: transaction is not initialized.");
+        }
     }
 
     /**
@@ -37,7 +37,12 @@ public class UserTransactionLogger {
      * @param amount the amount the user withdraw from its account.
      */
     public static void withdraw_UwU(account specificAccount, double amount) {
-        transaction.write(dtf.format(now) + "\tWithdrawal from: " + check_Class(specificAccount) + "-" + specificAccount.get_Account_Num() + "\t\t\t" + amount +"\n");
+        if(transaction != null) {
+            transaction.write(dtf.format(now) + "\tWithdrawal from: " + check_Class(specificAccount) + "-" + specificAccount.get_Account_Num() + "\t\t\t" + amount + "\n");
+        }
+        else{
+            System.out.println("Error: transaction is not initialized.");
+        }
     }
 
     /**
@@ -47,7 +52,12 @@ public class UserTransactionLogger {
      * @param amount the amount the user is going to pay that account.
      */
     public static void payment_UwU(account paying, account recipient, double amount){
-        transaction.write(dtf.format(now) + "\tPayment to: " +  check_Class(recipient) + "-" + recipient.get_Account_Num() + "\t\t\t -" + amount + "\n");
+        if(transaction != null) {
+            transaction.write(dtf.format(now) + "\tPayment to: " + check_Class(recipient) + "-" + recipient.get_Account_Num() + "\t\t\t -" + amount + "\n");
+        }
+        else{
+            System.out.println("Error: transaction is not initialized.");
+        }
     }
 
     /**
@@ -57,7 +67,12 @@ public class UserTransactionLogger {
      * @param amount total amount that the user is transfering.
      */
     public static void transfer_User(account transFrom, account transTo, double amount){
-        transaction.write(dtf.format(now) + "\tTransfer to: " +  check_Class(transTo) + "-" + transTo.get_Account_Num() + " From: " + check_Class(transFrom) + "-" + transFrom.get_Account_Num()+ "\t\t\t -" + amount + "\n");
+        if(transaction != null) {
+            transaction.write(dtf.format(now) + "\tTransfer to: " + check_Class(transTo) + "-" + transTo.get_Account_Num() + " From: " + check_Class(transFrom) + "-" + transFrom.get_Account_Num() + "\t\t\t -" + amount + "\n");
+        }
+        else{
+            System.out.println("Error: transaction is not initialized.");
+        }
     }
 
     /**
@@ -65,7 +80,12 @@ public class UserTransactionLogger {
      * @param specificAccount any account from the user, can be Savings, Checking or Credit.
      */
     public static void new_balance(account specificAccount){
-        transaction.write(specificAccount.get_FullName() + "'s New Balance for " + check_Class(specificAccount) + "-" + specificAccount.get_Account_Num() + ": " + specificAccount.balance() + ". ");
+        if(transaction != null) {
+            transaction.write(specificAccount.get_FullName() + "'s New Balance for " + check_Class(specificAccount) + "-" + specificAccount.get_Account_Num() + ": " + specificAccount.balance() + ". ");
+        }
+        else{
+            System.out.println("Error: transaction is not initialized.");
+        }
     }
 
     /**
@@ -73,9 +93,14 @@ public class UserTransactionLogger {
             * @param view the account from user.
      */
     public static void inquire_balance_UwU(account view){
-        transaction.write(view.get_FullName() + " made a balance inquiry on " + check_Class(view) + "-" + view.get_Account_Num() + ". ");
-        transaction.write(view.get_FullName() + "'s Balance for " + check_Class(view) + "-" + view.get_Account_Num() + ": " + view.balance());
-        transaction.write("\n");
+        if(transaction != null) {
+            transaction.write(view.get_FullName() + " made a balance inquiry on " + check_Class(view) + "-" + view.get_Account_Num() + ". ");
+            transaction.write(view.get_FullName() + "'s Balance for " + check_Class(view) + "-" + view.get_Account_Num() + ": " + view.balance());
+            transaction.write("\n");
+        }
+        else{
+            System.out.println("Error: transaction is not initialized.");
+        }
     }
 
     /**
@@ -100,11 +125,15 @@ public class UserTransactionLogger {
      * @param accountType - account we are recording
      */
     public static void starting_balance(account accountType){
-        transaction.write("\n");
-        transaction.write("-------- Starting Balance --------\n");
-        transaction.write(check_Class(accountType) + "-" + accountType.get_Account_Num() + " Starting Balance: "+ accountType.balance() + "\n");
-        transaction.write("\n");
-        transaction.write("-------- Transactions --------\n");
+        if(transaction != null) {
+            transaction.write("\n");
+            transaction.write("-------- Starting Balance --------\n");
+            transaction.write(check_Class(accountType) + "-" + accountType.get_Account_Num() + " Starting Balance: "+ accountType.balance() + "\n");
+            transaction.write("\n");
+            transaction.write("-------- Transactions --------\n");
+        }else{
+            System.out.println("Error: transaction is not initialized.");
+        }
     }
 
     /**
@@ -125,11 +154,16 @@ public class UserTransactionLogger {
     }
     
     public static void add_user_information(Customer user){
-        transaction.write("-------- Account Information --------\n");
-        transaction.write("Account Name: " + user.get_First_name() + " " + user.get_Last_name() + "\n");
-        transaction.write("Account ID Number: " + user.get_Id_No() + "\n");
-        transaction.write("Date of Birth: " + user.get_Date_of_birth() + "\n");
-        transaction.write("Address: " + user.get_Address() + "\n");
+        if(transaction != null) {
+            transaction.write("-------- Account Information --------\n");
+            transaction.write("Account Name: " + user.get_First_name() + " " + user.get_Last_name() + "\n");
+            transaction.write("Account ID Number: " + user.get_Id_No() + "\n");
+            transaction.write("Date of Birth: " + user.get_Date_of_birth() + "\n");
+            transaction.write("Address: " + user.get_Address() + "\n");
+        }
+        else{
+            System.out.println("Error: transaction is not initialized.");
+        }
 
     }
 
@@ -137,10 +171,15 @@ public class UserTransactionLogger {
      * This method let us close the file. End of the file.
      */
     public static void closeLog(account specificAccount) {
-        transaction.write("\n");
-        transaction.write("-------- Ending Balance --------\n");
-        transaction.write("Ending Balance for " + dtf.format(now) + "\t\t\t" + specificAccount.balance());
-        transaction.close();
+        if(transaction != null) {
+            transaction.write("\n");
+            transaction.write("-------- Ending Balance --------\n");
+            transaction.write("Ending Balance for " + dtf.format(now) + "\t\t\t" + specificAccount.balance());
+            transaction.close();
+        }
+        else{
+            System.out.println("Error: transaction is not initialized.");
+        }
     }
 
 

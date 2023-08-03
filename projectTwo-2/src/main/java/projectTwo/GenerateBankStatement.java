@@ -17,7 +17,12 @@ public class GenerateBankStatement {
      * @param amount this is possible to input the right amount the user deposit into an account.
      */
     public static void deposit_UwU(account specificAccount, double amount){
-        statementWriter.write(dtf.format(now) + "\tDeposit to: " + check_Class(specificAccount) + "-" + specificAccount.get_Account_Num() + "\t\t+" + amount +"\n");
+        if(statementWriter != null) {
+            statementWriter.write(dtf.format(now) + "\tDeposit to: " + check_Class(specificAccount) + "-" + specificAccount.get_Account_Num() + "\t\t+" + amount + "\n");
+        }
+        else{
+            System.out.println("Error: transaction is not initialized.");
+        }
     }
 
     /**
@@ -26,7 +31,12 @@ public class GenerateBankStatement {
      * @param amount the amount the user withdraw from its account.
      */
     public static void withdraw_UwU(account specificAccount, double amount) {
-        statementWriter.write(dtf.format(now) + "\tWithdrawal from: " + check_Class(specificAccount) + "-" + specificAccount.get_Account_Num() + "\t\t-" + amount +"\n");
+        if(statementWriter != null) {
+            statementWriter.write(dtf.format(now) + "\tWithdrawal from: " + check_Class(specificAccount) + "-" + specificAccount.get_Account_Num() + "\t\t-" + amount + "\n");
+        }
+        else{
+            System.out.println("Error: transaction is not initialized.");
+        }
     }
 
     /**
@@ -36,7 +46,12 @@ public class GenerateBankStatement {
      * @param amount the amount the user is going to pay that account.
      */
     public static void payment_UwU(account paying, account recipient, double amount){
-        statementWriter.write(dtf.format(now) + "\tPayment to: " +  check_Class(recipient) + "-" + recipient.get_Account_Num() + " From: " + check_Class(paying) + "-" + paying.get_Account_Num()+  "\t\t -" + amount + "\n");
+        if(statementWriter != null) {
+            statementWriter.write(dtf.format(now) + "\tPayment to: " + check_Class(recipient) + "-" + recipient.get_Account_Num() + " From: " + check_Class(paying) + "-" + paying.get_Account_Num() + "\t\t -" + amount + "\n");
+        }
+        else{
+            System.out.println("Error: transaction is not initialized.");
+        }
     }
 
     /**
@@ -46,7 +61,12 @@ public class GenerateBankStatement {
      * @param amount total amount that the user is transfering.
      */
     public static void transfer_User(account transFrom, account transTo, double amount){
-        statementWriter.write(dtf.format(now) + "\tTransfer to: " +  check_Class(transTo) + "-" + transTo.get_Account_Num() + " From: " + check_Class(transFrom) + "-" + transFrom.get_Account_Num()+ "\t\t -" + amount + "\n");
+        if(statementWriter != null) {
+            statementWriter.write(dtf.format(now) + "\tTransfer to: " + check_Class(transTo) + "-" + transTo.get_Account_Num() + " From: " + check_Class(transFrom) + "-" + transFrom.get_Account_Num() + "\t\t -" + amount + "\n");
+        }
+        else{
+            System.out.println("Error: transaction is not initialized.");
+        }
     }
 
     /**
@@ -54,7 +74,12 @@ public class GenerateBankStatement {
      * @param specificAccount any account from the user, can be Savings, Checking or Credit.
      */
     public static void new_balance(account specificAccount){
-        statementWriter.write(dtf.format(now) + "\tBalance Iquiry for: " +  check_Class(specificAccount) + "-" + specificAccount.get_Account_Num() + "\t\t$"+ specificAccount.balance() + "\n");
+        if(statementWriter != null) {
+            statementWriter.write(dtf.format(now) + "\tBalance Iquiry for: " + check_Class(specificAccount) + "-" + specificAccount.get_Account_Num() + "\t\t$" + specificAccount.balance() + "\n");
+        }
+        else{
+            System.out.println("Error: transaction is not initialized.");
+        }
     }
 
     /**
@@ -79,7 +104,12 @@ public class GenerateBankStatement {
      * @param account_UwU - account that is being accessed.
      */
     public static void specific_account_ID(account account_UwU){
-        statementWriter.write("For account: " + check_Class(account_UwU) + "-" + account_UwU.get_Account_Num() + "\n\n\n");
+        if(statementWriter != null) {
+            statementWriter.write("For account: " + check_Class(account_UwU) + "-" + account_UwU.get_Account_Num() + "\n\n\n");
+        }
+        else{
+            System.out.println("Error: transaction is not initialized.");
+        }
     }
 
     /**
@@ -104,16 +134,26 @@ public class GenerateBankStatement {
      * @param user - allows the use/access of Customer attributes
      */
     public static void add_user_information(Customer user){
-        statementWriter.write("Account Name: " + user.get_First_name() + " " + user.get_Last_name() + "\n");
-        statementWriter.write("Account ID Number: " + user.get_Id_No() + "\n");
-        statementWriter.write("Date of Birth: " + user.get_Date_of_birth() + "\n");
-        statementWriter.write("Address: " + user.get_Address() + "\n");
-        statementWriter.write("\n");
+        if(statementWriter != null) {
+            statementWriter.write("Account Name: " + user.get_First_name() + " " + user.get_Last_name() + "\n");
+            statementWriter.write("Account ID Number: " + user.get_Id_No() + "\n");
+            statementWriter.write("Date of Birth: " + user.get_Date_of_birth() + "\n");
+            statementWriter.write("Address: " + user.get_Address() + "\n");
+            statementWriter.write("\n");
+        }
+        else{
+            System.out.println("Error: transaction is not initialized.");
+        }
 
     }
 
     public static void close_statement(account specificAccount){
-        statementWriter.write("Ending Balance for " + dtf.format(now) + "\t\t\t" + specificAccount.balance());
-        statementWriter.close();
+        if(statementWriter != null) {
+            statementWriter.write("Ending Balance for " + dtf.format(now) + "\t\t\t" + specificAccount.balance());
+            statementWriter.close();
+        }
+        else{
+            System.out.println("Error: transaction is not initialized.");
+        }
     }
 }
