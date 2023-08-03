@@ -39,9 +39,11 @@ public class Run_Bank {
             while (access) {
                 String str;
                 String idString;
-                System.out.println("1. Access as Manager \n2. Access as Customer \n3. Exit the system, type [EXIT]");
+                System.out.println("1. Access as Manager \n2. Access as Customer \n3. Exit the system, type [EXIT] \n4. Add User");
                 str = scnr.nextLine();
-                if (str.equals("EXIT")) {
+                if (str.equals("4")){
+                    CustomerMap.add_new_user();
+                } else if (str.equals("EXIT")) {
                     break;
                 } else if (str.equals("2")) {
                     System.out.println("1. Inquire by account name. \n2. Inquire by account type/number \n3. Exit");
@@ -111,7 +113,7 @@ public class Run_Bank {
                     if(!randomBool) {
                         ManagerTransactionFileReader.read_MT_File("projectTwo-2/src/main/java/projectTwo/Transactions.csv");
                         randomBool = false;
-                    }//System.out.println("GoodBYE!");
+                    }
                     //access = false;
                 }
             } //end of the case(access).

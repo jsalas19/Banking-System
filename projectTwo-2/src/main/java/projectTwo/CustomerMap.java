@@ -52,7 +52,7 @@ public class CustomerMap {
         create_data.write_CSV_File(customerMap);
     }
 
-    public static void add_new_user(Map<List<String>, Customer> data) {
+    public static void add_new_user() {
         Random rdm = new Random();
         Scanner scr = new Scanner(System.in);
         Customer new_Customer = new Customer();
@@ -124,6 +124,6 @@ public class CustomerMap {
 
         List<String> keys = new ArrayList<String>(Arrays.asList(String.valueOf(set_id), strName[0], strName[1]));
 
-        data.put(keys, new_Customer);
+        customerMap.put(keys, new_Customer);
     }
 }
