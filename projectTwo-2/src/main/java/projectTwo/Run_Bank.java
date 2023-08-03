@@ -6,6 +6,8 @@ import java.io.*;
 import java.util.*;
 import java.util.List;
 
+import static projectTwo.UserTransactionLogger.starting_balance;
+
 /**
  * @author Joshua Salas, Diana Olivas, Ruth Cazares-Bravo
  * @Version openjdk-20.0.1

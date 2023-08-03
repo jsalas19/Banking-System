@@ -49,6 +49,7 @@ public class Savings implements account{
         if(amount > 0.00){
             Savings_Balance = Savings_Balance + amount;
             BankLogger.deposit_UwU(this, amount);
+            UserTransactionLogger.deposit_UwU1(this, amount);
             depos = true;
 
         }
@@ -69,6 +70,7 @@ public class Savings implements account{
         if(Savings_Balance >= amount){
             Savings_Balance = Savings_Balance - amount;
             BankLogger.withdraw_UwU(this, amount);
+            UserTransactionLogger.withdraw_UwU(this, amount);
             System.out.println("You successfully widhtrawn $" + amount);
         }
         else{
@@ -92,6 +94,7 @@ public class Savings implements account{
                 withdraw(amount);
                 recipient.deposit(amount);
                 BankLogger.payment_UwU(this, recipient, amount);
+                UserTransactionLogger.payment_UwU(this, recipient, amount);
                 System.out.println("You have successfully made a payment of $" + amount + ". To another projectTwo.account");
             }
         }
@@ -111,6 +114,7 @@ public class Savings implements account{
                 withdraw(amount);
                 accoType.deposit(amount);
                 BankLogger.transfer_UwU(this, accoType, amount);
+                UserTransactionLogger.transfer_User(this, accoType, amount);
                 System.out.println("You have successfully transfered $" + amount + " to this projectTwo.account.");
             }
 
@@ -126,6 +130,7 @@ public class Savings implements account{
         System.out.println("Account Number: "+ this.Sav_Acc_Num);
         System.out.println("\tBalance: "+this.Savings_Balance);
         BankLogger.inquire_balance_UwU(this);
+        UserTransactionLogger.inquire_balance_UwU(this);
     }
 
 

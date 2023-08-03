@@ -71,6 +71,7 @@ public class Checking implements account{
         if (amount >= 0.0){
             this.checking_bal += amount;
             BankLogger.deposit_UwU(this, amount);
+            UserTransactionLogger.deposit_UwU1(this, amount);
             depos = true;
         }
         return depos;
@@ -89,6 +90,7 @@ public class Checking implements account{
         if (amount <= this.checking_bal){
             this.checking_bal -= amount;
             BankLogger.withdraw_UwU(this, amount);
+            UserTransactionLogger.withdraw_UwU(this, amount);
         }
     }
 
@@ -108,6 +110,7 @@ public class Checking implements account{
                 withdraw(amount);
                 recipient.deposit(amount);
                 BankLogger.payment_UwU(this, recipient, amount);
+                UserTransactionLogger.payment_UwU(this, recipient, amount);
                 System.out.println("Success! (payment)");
             }
             System.out.println("Failed! (payment)");
@@ -129,6 +132,7 @@ public class Checking implements account{
                 withdraw(amount);
                 account_Type.deposit(amount);
                 BankLogger.transfer_UwU(this, account_Type, amount);
+                UserTransactionLogger.transfer_User(this, account_Type, amount);
                 System.out.println("Success! (transfer)");
             }
             System.out.println("Failed! (transfer)");
@@ -140,5 +144,6 @@ public class Checking implements account{
         System.out.println("Account Number: "+ this.checking_account_no);
         System.out.println("\tBalance: "+this.checking_bal);
         BankLogger.inquire_balance_UwU(this);
+        UserTransactionLogger.inquire_balance_UwU(this);
     }
 }

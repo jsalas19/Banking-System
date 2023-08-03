@@ -13,22 +13,14 @@ public class UserTransactionLogger {
     private static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
     private static LocalDateTime now = LocalDateTime.now();
 
-
-
     /**
      * Prints into the log file the action the user did on deposit on the user's file.
      * @param specificAccount specifying the account from the user (Savings, Checking, or Credit).
      * @param amount this is possible to input the right amount the user deposit into an account.
      */
     public static void deposit_UwU1(account specificAccount, double amount){
-        //if(transaction != null) {
-            transaction.write(specificAccount.get_FullName() + " deposited $" + amount + " to " + check_Class(specificAccount) + "-" + specificAccount.get_Account_Num() + ". ");
+            transaction.write(specificAccount.get_FullName() + " deposited $" + amount + " to " + check_Class(specificAccount) + "-" + specificAccount.get_Account_Num() + ". \n");
             new_balance(specificAccount);
-            transaction.write("\n");
-//        }
-//        else{
-//            System.out.println("Error: transaction is not initialized.");
-//        }
     }
 
     /**
@@ -92,12 +84,15 @@ public class UserTransactionLogger {
             case "projectTwo.Savings":
                 return "Savings";
         }
-        return null;
+        return " ";
+
     }
 
     public static void starting_balance(account accountType){
+        transaction.write("----- Starting Balance -----\n");
         transaction.write(check_Class(accountType) + "-" + accountType.get_Account_Num() + " Starting Balance: "+ accountType.balance());
-
+        transaction.write("\n");
+        transaction.write("\n----- Transactions -----\n");
     }
 
     /**
@@ -116,12 +111,18 @@ public class UserTransactionLogger {
             System.exit(0);
         }
     }
-    
+
+    /**
+     * This method prints the account information for the user.
+     * @param user user infromation.
+     */
     public static void add_user_information(Customer user){
+        transaction.write("----- Account information -----\n");
         transaction.write("Account Name: " + user.get_First_name() + " " + user.get_Last_name() + "\n");
         transaction.write("Account ID Number: " + user.get_Id_No() + "\n");
         transaction.write("Date of Birth: " + user.get_Date_of_birth() + "\n");
         transaction.write("Address: " + user.get_Address() + "\n");
+        transaction.write("\n");
 
     }
 
@@ -129,6 +130,9 @@ public class UserTransactionLogger {
      * This method let us close the file. End of the file.
      */
     public static void closeLog(account specificAccount) {
+        transaction.write("\n");
+        transaction.write("\n");
+        transaction.write("----- Ending Balance -----\n");
         transaction.write("Ending Balance for " + dtf.format(now) + "\t\t\t" + specificAccount.balance());
         transaction.close();
     }
