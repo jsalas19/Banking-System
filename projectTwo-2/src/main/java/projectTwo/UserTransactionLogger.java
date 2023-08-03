@@ -22,7 +22,7 @@ public class UserTransactionLogger {
      */
     public static void deposit_UwU1(account specificAccount, double amount){
         //if(transaction != null) {
-            transaction.write(specificAccount.get_FullName() + " deposited $" + amount + " to " + check_Class(specificAccount) + "-" + specificAccount.get_Account_Num() + ". ");
+            transaction.write(specificAccount.get_FullName() + " deposited $" + amount + " to " + check_Class(specificAccount) + "-" + specificAccount.get_Account_Num() + ". \n");
             new_balance(specificAccount);
             transaction.write("\n");
 //        }
@@ -96,8 +96,11 @@ public class UserTransactionLogger {
     }
 
     public static void starting_balance(account accountType){
-        transaction.write(check_Class(accountType) + "-" + accountType.get_Account_Num() + " Starting Balance: "+ accountType.balance());
-
+        transaction.write("\n");
+        transaction.write("-------- Starting Balance --------\n");
+        transaction.write(check_Class(accountType) + "-" + accountType.get_Account_Num() + " Starting Balance: "+ accountType.balance() + "\n");
+        transaction.write("\n");
+        transaction.write("-------- Transactions --------\n");
     }
 
     /**
@@ -118,6 +121,7 @@ public class UserTransactionLogger {
     }
     
     public static void add_user_information(Customer user){
+        transaction.write("-------- Account Information --------\n");
         transaction.write("Account Name: " + user.get_First_name() + " " + user.get_Last_name() + "\n");
         transaction.write("Account ID Number: " + user.get_Id_No() + "\n");
         transaction.write("Date of Birth: " + user.get_Date_of_birth() + "\n");
@@ -129,6 +133,8 @@ public class UserTransactionLogger {
      * This method let us close the file. End of the file.
      */
     public static void closeLog(account specificAccount) {
+        transaction.write("\n");
+        transaction.write("-------- Ending Balance --------\n");
         transaction.write("Ending Balance for " + dtf.format(now) + "\t\t\t" + specificAccount.balance());
         transaction.close();
     }
