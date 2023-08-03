@@ -5,10 +5,10 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class CustomerFinder {
-    public static Customer find_account(String str1, String str2, String str3){
+    public static Customer find_account(String str1, String str2){
         for (List<String> j : CustomerMap.get_CustomerMap().keySet()){
             //System.out.println(j);
-            if (j.contains(str1) && j.contains(str2) && j.contains(str3)){
+            if (j.contains(str1) && j.contains(str2)){
                 return CustomerMap.get_CustomerMap().get(j);
             }
         }

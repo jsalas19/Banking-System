@@ -51,7 +51,7 @@ public class Run_Bank {
                                 str = scnr.nextLine();
                                 List<String> strList = new ArrayList<>(List.of(str.split(" ")));
                                 if (strList.size() == 2) {
-                                    left = CustomerFinder.find_account(strList.get(0), strList.get(1), strList.get(2));
+                                    left = CustomerFinder.find_account(strList.get(0), strList.get(1));
                                     UserTransactionLogger.openLog(str, left);
                                     if (left == null) {
                                         System.out.println("Sorry, account was not found \nEnter a proper name!");
@@ -83,7 +83,7 @@ public class Run_Bank {
                             System.out.println("Whose account would you like to inquire about?: ");
                             str = scnr.nextLine();
                             List<String> strList = new ArrayList<>(List.of(str.split(" ")));
-                            Customer left = CustomerFinder.find_account(strList.get(0), strList.get(1), strList.get(2));
+                            Customer left = CustomerFinder.find_account(strList.get(0), strList.get(1));
                             if (left == null) {
                                 System.out.print("Customer does not exist");
                             } else {

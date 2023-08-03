@@ -13,15 +13,24 @@ public class UserTransactionLogger {
     private static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
     private static LocalDateTime now = LocalDateTime.now();
 
+    public static void initLogFile(PrintWriter writer) {
+        logFile = writer;
+    }
+
     /**
      * Prints into the log file the action the user did on deposit on the user's file.
      * @param specificAccount specifying the account from the user (Savings, Checking, or Credit).
      * @param amount this is possible to input the right amount the user deposit into an account.
      */
-    public static void deposit_UwU(account specificAccount, double amount){
-        logFile.write(specificAccount.get_FullName() + " deposited $" + amount + " to " + check_Class(specificAccount) + "-"+ specificAccount.get_Account_Num() + ". ");
-        new_balance(specificAccount);
-        logFile.write("\n");
+    public static void deposit_UwU1(account specificAccount, double amount){
+        //if(logFile != null) {
+            logFile.write(specificAccount.get_FullName() + " deposited $" + amount + " to " + check_Class(specificAccount) + "-" + specificAccount.get_Account_Num() + ". ");
+            new_balance(specificAccount);
+            logFile.write("\n");
+//        }
+//        else{
+//            System.out.println("Error: logFile is not initialized.");
+//        }
     }
 
     /**
@@ -117,8 +126,8 @@ public class UserTransactionLogger {
      * This method let us close the file. End of the file.
      */
     public static void closeLog() {
-        logFile.write("\n");
-        logFile.write("Ending Balance for " + now + "\t\t\t\t");
+        //logFile.write("\n");
+       // logFile.write("Ending Balance for " + now + "\t\t\t\t");
         logFile.close();
     }
 
