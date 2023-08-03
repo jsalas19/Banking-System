@@ -56,6 +56,7 @@ public class Run_Bank {
                                 if (strList.size() == 2) {
                                     left = CustomerFinder.find_account(strList.get(0), strList.get(1));
                                     UserTransactionLogger.openLog(str, left);
+                                    GenerateBankStatement.create_Bank_Statement(str, left);
                                     if (left == null) {
                                         System.out.println("Sorry, account was not found \nEnter a proper name!");
                                     } else {
@@ -64,6 +65,7 @@ public class Run_Bank {
                                             available_actions_specific(specifiedA);
                                         }
                                         UserTransactionLogger.closeLog(specifiedA);
+                                        GenerateBankStatement.close_statement(specifiedA);
                                     }
                                 }
                                 //UserTransactionLogger.closeLog();

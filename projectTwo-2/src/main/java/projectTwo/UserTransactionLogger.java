@@ -95,6 +95,10 @@ public class UserTransactionLogger {
         return null;
     }
 
+    /**
+     * Writes starting balance to specific user's transaction file.
+     * @param accountType - account we are recording
+     */
     public static void starting_balance(account accountType){
         transaction.write("\n");
         transaction.write("-------- Starting Balance --------\n");

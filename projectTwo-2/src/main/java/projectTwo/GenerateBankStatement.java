@@ -79,7 +79,7 @@ public class GenerateBankStatement {
      * @param account_UwU - account that is being accessed.
      */
     public static void specific_account_ID(account account_UwU){
-        statementWriter.write("For account: " + check_Class(account_UwU) + "-" + account_UwU.get_Account_Num());
+        statementWriter.write("For account: " + check_Class(account_UwU) + "-" + account_UwU.get_Account_Num() + "\n\n\n");
     }
 
     /**
@@ -87,7 +87,7 @@ public class GenerateBankStatement {
      * @param filepath - the name of the user allows the creation of a new bank statement file.
      * @param user - used to get Customer attributes
      */
-    public void create_Bank_Statement(String filepath, Customer user){
+    public static void create_Bank_Statement(String filepath, Customer user){
         File bs = new File(filepath + "_bank_statement.txt");
         try{
             if (!bs.isFile()){
@@ -108,6 +108,12 @@ public class GenerateBankStatement {
         statementWriter.write("Account ID Number: " + user.get_Id_No() + "\n");
         statementWriter.write("Date of Birth: " + user.get_Date_of_birth() + "\n");
         statementWriter.write("Address: " + user.get_Address() + "\n");
+        statementWriter.write("\n");
 
+    }
+
+    public static void close_statement(account specificAccount){
+        statementWriter.write("Ending Balance for " + dtf.format(now) + "\t\t\t" + specificAccount.balance());
+        statementWriter.close();
     }
 }

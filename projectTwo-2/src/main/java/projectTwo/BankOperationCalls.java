@@ -3,8 +3,17 @@ package projectTwo;
 public class BankOperationCalls {
     static private account accountType;
 
+    /**
+     * Sets local accountType variable to avoid having to pass accountT from other class.
+     * @param accountT - specific account set by user
+     */
     public static void set_accountType(account accountT){accountType = accountT;}
 
+    /**
+     * Method containing switch statement to avoid repeated code and improve maintainability (for
+     * savings and checkings).
+     * @param accountT - specific account set by user and received by this class.
+     */
     public static void switch_for_Sav_and_Check(account accountT){
         set_accountType(accountT);
         String str;
@@ -41,16 +50,25 @@ public class BankOperationCalls {
         //Run_Bank.available_actions_specific(specified1);
     }
 
+    /**
+     * Call of account interface's deposit method.
+     */
     public static void deposit_call(){
         double amount = Prompts.enter_strInt_prompt("Enter Deposit Amount: $");
         accountType.deposit(amount);
     }
 
+    /**
+     * Call of account interface's withdraw method.
+     */
     public static void withdraw_call(){
         double amount = Prompts.enter_strInt_prompt("Enter Withdraw Amount: $");
         accountType.withdraw(amount);
     }
 
+    /**
+     * Call of account interface's payment method.
+     */
     public static void payment_call(){
         double amount = Prompts.enter_strInt_prompt("Enter Payment Amount: $");
         while (amount > accountType.balance()) {
@@ -62,6 +80,9 @@ public class BankOperationCalls {
         }
     }
 
+    /**
+     * Call of account interface's transfer method.
+     */
     public static void transfer_call(){
         double amount = Prompts.enter_strInt_prompt("Enter the amount you wish to Transfer: $");
         while (amount > accountType.balance()) {
@@ -73,6 +94,11 @@ public class BankOperationCalls {
         }
     }
 
+    /**
+     * Method containing switch statement to avoid repeated code and improve maintainability (for
+     * credit).
+     * @param accountT - specific account set by user and received by this class.
+     */
     public static void credit_switch_for_Sav_and_Check(account accountT){
         set_accountType(accountT);
         String str;
@@ -108,11 +134,17 @@ public class BankOperationCalls {
 
     }
 
+    /**
+     * Call of credit's deposit method via account interface.
+     */
     public static void credit_deposit_call(){
         double amount = Prompts.enter_strInt_prompt("Enter Balance Payment Amount: $");
         accountType.deposit(amount);
     }
 
+    /**
+     * Call of credit's payment method via account interface.
+     */
     public static void credit_payment_call(){
         double amount = Prompts.enter_strInt_prompt("Enter Payment Amount: $");
         while (Math.abs(((Credit) accountType).get_Credit_Max()) - amount < 0) {
@@ -127,6 +159,9 @@ public class BankOperationCalls {
         }
     }
 
+    /**
+     * Call of credit's transfer method via account interface.
+     */
     public static void credit_transfer_call(){
         double amount = Prompts.enter_strInt_prompt("Enter the amount you wish to Transfer: $");
         while (Math.abs(((Credit) accountType).get_Credit_Max()) - amount < 0) {

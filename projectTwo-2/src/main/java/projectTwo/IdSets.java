@@ -8,6 +8,10 @@ public class IdSets {
     protected static List<Integer> Id_list = new ArrayList<>();
     protected static List<Integer> Acc_Id_list = new ArrayList<>();
 
+    /**
+     * Allows us to access and check specific types of data.
+     * @param data - extracted data from CSV
+     */
     public static void create_sets(Map<String, List<String>> data){
         for (int k = 0; k < data.get("Identification Number").size(); k++) {
             Id_list.add(Integer.parseInt(data.get("Identification Number").get(k)));
