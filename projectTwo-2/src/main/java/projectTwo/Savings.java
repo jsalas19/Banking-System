@@ -48,9 +48,9 @@ public class Savings implements account{
         //the deposit has to be geater than 0.00
         if(amount > 0.00){
             Savings_Balance = Savings_Balance + amount;
-            BankLogger.deposit_UwU(this, amount);
-            UserTransactionLogger.deposit_UwU1(this, amount);
-            GenerateBankStatement.deposit_UwU(this,amount);
+            //BankLogger.deposit_UwU(this, amount);
+            //UserTransactionLogger.deposit_UwU1(this, amount);
+            //GenerateBankStatement.deposit_UwU(this,amount);
             depos = true;
 
         }
@@ -70,9 +70,9 @@ public class Savings implements account{
         //if the amount is less than the savings balanace, proceed to withdraw money
         if(Savings_Balance >= amount){
             Savings_Balance = Savings_Balance - amount;
-            BankLogger.withdraw_UwU(this, amount);
-            UserTransactionLogger.withdraw_UwU(this, amount);
-            GenerateBankStatement.withdraw_UwU(this,amount);
+            //BankLogger.withdraw_UwU(this, amount);
+            //UserTransactionLogger.withdraw_UwU(this, amount);
+            //GenerateBankStatement.withdraw_UwU(this,amount);
 
             System.out.println("You successfully widhtrawn $" + amount);
         }
@@ -97,9 +97,9 @@ public class Savings implements account{
             if(amount <= Savings_Balance && recipient.deposit(amount) ){
                 withdraw(amount);
                 depos = true;
-                BankLogger.payment_UwU(this, recipient, amount);
-                UserTransactionLogger.payment_UwU(this, recipient, amount);
-                GenerateBankStatement.payment_UwU(this,recipient, amount);
+                //BankLogger.payment_UwU(this, recipient, amount);
+                //UserTransactionLogger.payment_UwU(this, recipient, amount);
+                //GenerateBankStatement.payment_UwU(this,recipient, amount);
                 System.out.println("You have successfully made a payment of $" + amount + ". To another projectTwo.account");
             }
         }
@@ -119,9 +119,9 @@ public class Savings implements account{
             if(amount <= Savings_Balance && accoType.deposit(amount)){
                 withdraw(amount);
                 depos = true;
-                BankLogger.transfer_UwU(this, accoType, amount);
-                UserTransactionLogger.transfer_User(this, accoType, amount);
-                GenerateBankStatement.transfer_User(this, accoType, amount);
+                //BankLogger.transfer_UwU(this, accoType, amount);
+                //UserTransactionLogger.transfer_User(this, accoType, amount);
+                //GenerateBankStatement.transfer_User(this, accoType, amount);
                 System.out.println("You have successfully transfered $" + amount + " to this projectTwo.account.");
             }
 
@@ -137,8 +137,8 @@ public class Savings implements account{
     public void display_account_info() {
         System.out.println("Account Number: "+ this.Sav_Acc_Num);
         System.out.println("\tBalance: "+this.Savings_Balance);
-        BankLogger.inquire_balance_UwU(this);
-        UserTransactionLogger.inquire_balance_UwU(this);
+        //BankLogger.inquire_balance_UwU(this);
+        //UserTransactionLogger.inquire_balance_UwU(this);
     }
 
 
