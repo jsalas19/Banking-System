@@ -80,9 +80,9 @@ public class Credit implements account{
         }
         else if(amount > 0.00) {
             credit_Balance = credit_Balance + amount;
-            BankLogger.deposit_UwU(this, amount);
-            UserTransactionLogger.deposit_UwU1(this, amount);
-            GenerateBankStatement.deposit_UwU(this,amount);
+            //BankLogger.deposit_UwU(this, amount);
+            //UserTransactionLogger.deposit_UwU1(this, amount);
+            //GenerateBankStatement.deposit_UwU(this,amount);
             System.out.println("You made a deposit of $" + amount);
             depos = true;
         } else {
@@ -98,9 +98,9 @@ public class Credit implements account{
     public void withdraw(double amount) {
         if (Math.abs(credit_Balance) + amount <=  max_Credit) {
             credit_Balance = credit_Balance -amount;
-            BankLogger.withdraw_UwU(this, amount);
-            UserTransactionLogger.withdraw_UwU(this, amount);
-            GenerateBankStatement.withdraw_UwU(this,amount);
+          //  BankLogger.withdraw_UwU(this, amount);
+            //UserTransactionLogger.withdraw_UwU(this, amount);
+           // GenerateBankStatement.withdraw_UwU(this,amount);
             System.out.println("you have successfully withdrawn $" + amount);
         }else if (Math.abs(credit_Balance) == max_Credit){
             System.out.println("Your account has reached Max Credit");
@@ -123,9 +123,9 @@ public class Credit implements account{
         if (recipient.get_Account_Num() != cred_Acc_Num && (recipient.get_Account_Num() % 1000) != (cred_Acc_Num % 1000)){
             if (recipient.deposit(amount)) {
                 withdraw(amount);
-                BankLogger.payment_UwU(this, recipient, amount);
+               // BankLogger.payment_UwU(this, recipient, amount);
                 //UserTransactionLogger.payment_UwU(this, recipient, amount);
-                GenerateBankStatement.payment_UwU(this,recipient, amount);
+                //GenerateBankStatement.payment_UwU(this,recipient, amount);
                 System.out.println("Success! (Payment)");
                 depos = true;
             }else{
@@ -148,9 +148,9 @@ public class Credit implements account{
         if (account_Type.get_Account_Num() != cred_Acc_Num && (account_Type.get_Account_Num() % 1000) == (cred_Acc_Num % 1000)) {
             if (amount <= credit_Balance && account_Type.deposit(amount )) {
                 withdraw(amount);
-                BankLogger.transfer_UwU(this, account_Type, amount);
-                UserTransactionLogger.transfer_User(this, account_Type, amount);
-                GenerateBankStatement.transfer_User(this, account_Type, amount);
+               // BankLogger.transfer_UwU(this, account_Type, amount);
+                //UserTransactionLogger.transfer_User(this, account_Type, amount);
+                //GenerateBankStatement.transfer_User(this, account_Type, amount);
                 System.out.println("Success! (Transfer)");
                 depos = true;
             } else {
@@ -165,7 +165,7 @@ public class Credit implements account{
         System.out.println("Account Number: "+ this.cred_Acc_Num);
         System.out.println("\tprojectTwo.Credit Max: "+ this.max_Credit);
         System.out.println("\tBalance: " + this.credit_Balance);
-        BankLogger.inquire_balance_UwU(this);
+        //BankLogger.inquire_balance_UwU(this);
         //UserTransactionLogger.inquire_balance_UwU(this);
     }
 

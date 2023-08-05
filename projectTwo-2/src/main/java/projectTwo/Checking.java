@@ -1,8 +1,5 @@
 package projectTwo;
 
-import projectTwo.BankLogger;
-import projectTwo.account;
-
 /**
  * @author Joshua Salas
  * This class contains the user's checking information and allows the user to withdraw, deposit, pay another user's
@@ -70,9 +67,9 @@ public class Checking implements account{
         boolean depos = false;
         if (amount >= 0.0){
             this.checking_bal += amount;
-            BankLogger.deposit_UwU(this, amount);
-            UserTransactionLogger.deposit_UwU1(this, amount);
-            GenerateBankStatement.deposit_UwU(this,amount);
+            //BankLogger.deposit_UwU(this, amount);
+            //UserTransactionLogger.deposit_UwU1(this, amount);
+            //GenerateBankStatement.deposit_UwU(this,amount);
             depos = true;
         }
         return depos;
@@ -90,9 +87,9 @@ public class Checking implements account{
     public void withdraw(double amount) {
         if (amount <= this.checking_bal){
             this.checking_bal -= amount;
-            BankLogger.withdraw_UwU(this, amount);
-            UserTransactionLogger.withdraw_UwU(this, amount);
-            GenerateBankStatement.withdraw_UwU(this,amount);
+            //BankLogger.withdraw_UwU(this, amount);
+            //UserTransactionLogger.withdraw_UwU(this, amount);
+            //GenerateBankStatement.withdraw_UwU(this,amount);
         }
     }
 
@@ -112,9 +109,9 @@ public class Checking implements account{
             if (amount <= this.checking_bal && recipient.deposit(amount )){
                 withdraw(amount);
                 depos = true;
-                BankLogger.payment_UwU(this, recipient, amount);
-                UserTransactionLogger.payment_UwU(this, recipient, amount);
-                GenerateBankStatement.payment_UwU(this,recipient, amount);
+                //BankLogger.payment_UwU(this, recipient, amount);
+                //UserTransactionLogger.payment_UwU(this, recipient, amount);
+                //GenerateBankStatement.payment_UwU(this,recipient, amount);
                 System.out.println("Success! (payment)");
             }
             System.out.println("Failed! (payment)");
@@ -137,9 +134,9 @@ public class Checking implements account{
             if (amount <= this.checking_bal && account_Type.deposit(amount)); {
                 withdraw(amount);
                 depos = true;
-                BankLogger.transfer_UwU(this, account_Type, amount);
-                UserTransactionLogger.transfer_User(this, account_Type, amount);
-                GenerateBankStatement.transfer_User(this, account_Type, amount);
+                //BankLogger.transfer_UwU(this, account_Type, amount);
+                //UserTransactionLogger.transfer_User(this, account_Type, amount);
+                //GenerateBankStatement.transfer_User(this, account_Type, amount);
 
                 System.out.println("Success! (transfer)");
             }
@@ -152,7 +149,7 @@ public class Checking implements account{
     public void display_account_info() {
         System.out.println("Account Number: "+ this.checking_account_no);
         System.out.println("\tBalance: "+this.checking_bal);
-        BankLogger.inquire_balance_UwU(this);
-        UserTransactionLogger.inquire_balance_UwU(this);
+        //BankLogger.inquire_balance_UwU(this);
+        //UserTransactionLogger.inquire_balance_UwU(this);
     }
 }
